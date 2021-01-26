@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F706189625BFFF6700E871C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F706189525BFFF6700E871C5 /* HomeViewController.swift */; };
 		F71F799225BB07AF009416EE /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F71F799025BB07AF009416EE /* Model.xcdatamodeld */; };
 		F7DDFF8225BAAA9200BF9D75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DDFF8125BAAA9200BF9D75 /* AppDelegate.swift */; };
 		F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DDFF8325BAAA9200BF9D75 /* SceneDelegate.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F706189525BFFF6700E871C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F71F799125BB07AF009416EE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		F7DDFF7E25BAAA9200BF9D75 /* MemoryCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7DDFF8125BAAA9200BF9D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F706189825C0001400E871C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F706189525BFFF6700E871C5 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F71F798C25BAFEB1009416EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,8 @@
 		F7DDFF8025BAAA9200BF9D75 /* MemoryCard */ = {
 			isa = PBXGroup;
 			children = (
+				F706189825C0001400E871C5 /* View */,
+				F7E3DAC525BC0BC30077A732 /* Utils */,
 				F71F798C25BAFEB1009416EE /* Model */,
 				F7DDFF8125BAAA9200BF9D75 /* AppDelegate.swift */,
 				F7DDFF8325BAAA9200BF9D75 /* SceneDelegate.swift */,
@@ -148,6 +160,7 @@
 				F7DDFF8225BAAA9200BF9D75 /* AppDelegate.swift in Sources */,
 				F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */,
 				F71F799225BB07AF009416EE /* Model.xcdatamodeld in Sources */,
+				F706189625BFFF6700E871C5 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
