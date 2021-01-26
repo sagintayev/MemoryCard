@@ -14,6 +14,7 @@
 		F7DDFF8625BAAA9200BF9D75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DDFF8525BAAA9200BF9D75 /* ViewController.swift */; };
 		F7DDFF8B25BAAA9700BF9D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7DDFF8A25BAAA9700BF9D75 /* Assets.xcassets */; };
 		F7DDFF8E25BAAA9700BF9D75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7DDFF8C25BAAA9700BF9D75 /* LaunchScreen.storyboard */; };
+		F7E3DAC725BC0ECF0077A732 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E3DAC625BC0ECF0077A732 /* PersistenceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F7DDFF8A25BAAA9700BF9D75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7DDFF8D25BAAA9700BF9D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F7DDFF8F25BAAA9700BF9D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7E3DAC625BC0ECF0077A732 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,14 @@
 				F7DDFF8F25BAAA9700BF9D75 /* Info.plist */,
 			);
 			path = MemoryCard;
+			sourceTree = "<group>";
+		};
+		F7E3DAC525BC0BC30077A732 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F7E3DAC625BC0ECF0077A732 /* PersistenceService.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E3DAC725BC0ECF0077A732 /* PersistenceService.swift in Sources */,
 				F7DDFF8625BAAA9200BF9D75 /* ViewController.swift in Sources */,
 				F7DDFF8225BAAA9200BF9D75 /* AppDelegate.swift in Sources */,
 				F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */,
