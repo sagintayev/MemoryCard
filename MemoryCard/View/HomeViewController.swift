@@ -13,6 +13,8 @@ final class HomeViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .blue
         tableView.separatorStyle = .none
+        tableView.contentInset.top = 50
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
@@ -32,5 +34,33 @@ final class HomeViewController: UIViewController {
         ]
         
         NSLayoutConstraint.activate(constraints)
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        tableView.register(DecksTableViewCell.self, forCellReuseIdentifier: DecksTableViewCell.identifier)
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+}
+
+// MARK: - Table View Data Source
+extension HomeViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DecksTableViewCell.identifier, for: indexPath)
+        if let cell = cell as? DecksTableViewCell {
+            cell.titles = ["Kazakh", "ProgrammingProgrammingProgrammingProgramming", "Music", "Kazakh", "Programming", "Music", "Kazakh", "Programming", "Music", "Kazakh", "Programming", "Music", "Kazakh", "Programming", "Music"]
+        }
+        return cell
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }

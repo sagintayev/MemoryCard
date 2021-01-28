@@ -1,0 +1,65 @@
+//
+//  DeckCollectionViewCell.swift
+//  MemoryCard
+//
+//  Created by Zhanibek Sagintayev on 2021-01-26.
+//
+
+import UIKit
+
+class DeckCollectionViewCell: UICollectionViewCell {
+    static let identifier = "deck-collection-view-cell"
+    
+    var title: String? {
+        didSet { titleLabel.text = title }
+    }
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.numberOfLines = 2
+        label.lineBreakMode = .byWordWrapping
+        label.backgroundColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let bodyView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .gray
+        clipsToBounds = true
+        
+        setupSubviews()
+    }
+    
+    private func setupSubviews() {
+        [titleLabel, bodyView].forEach { contentView.addSubview($0) }
+        
+        let constraints = [
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            bodyView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            bodyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            bodyView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            bodyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.width / 15
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
