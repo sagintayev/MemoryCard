@@ -8,14 +8,18 @@
 import Foundation
 import CoreData
 
-class PersistenceManager {
+final class PersistenceManager {
     private let container: NSPersistentContainer
     private let modelName = "Model"
     lazy var defaultDeck: Deck = {
-        let deck = Deck(context: container.viewContext)
+        let deck = Deck(context: viewContext)
         deck.name = "Default"
         return deck
     }()
+    
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
     
     init() {
         container = NSPersistentContainer(name: modelName)
@@ -25,15 +29,15 @@ class PersistenceManager {
     }
     
     func delete(_ object: NSManagedObject) {
-        container.viewContext.delete(object)
+        viewContext.delete(object)
         saveViewContextOrRollbackIfFail()
     }
     
     private func saveViewContextOrRollbackIfFail() {
         do {
-            try container.viewContext.save()
+            try viewContext.save()
         } catch let error {
-            container.viewContext.rollback()
+            viewContext.rollback()
             print("Failed to save managed object context: \(error)")
         }
     }
@@ -42,7 +46,7 @@ class PersistenceManager {
 // MARK: - Card handling
 extension PersistenceManager {
     func saveCard(question: String, answer: String, in deck: Deck) {
-        let card = Card(context: container.viewContext)
+        let card = Card(context: viewContext)
         card.question = question
         card.answer = answer
         card.creationDate = Date()
@@ -53,20 +57,20 @@ extension PersistenceManager {
     
     func getAllCards() throws -> [Card] {
         let request: NSFetchRequest<Card> = Card.fetchRequest()
-        return try container.viewContext.fetch(request)
+        return try viewContext.fetch(request)
     }
 }
 
 // MARK: - Deck handling
 extension PersistenceManager {
     func saveDeck(named name: String) {
-        let deck = Deck(context: container.viewContext)
+        let deck = Deck(context: viewContext)
         deck.name = name
         saveViewContextOrRollbackIfFail()
     }
     
     func getAllDecks() throws -> [Deck] {
         let request: NSFetchRequest<Deck> = Deck.fetchRequest()
-        return try container.viewContext.fetch(request)
+        return try viewContext.fetch(request)
     }
 }
