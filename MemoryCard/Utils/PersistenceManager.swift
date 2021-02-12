@@ -11,11 +11,6 @@ import CoreData
 final class PersistenceManager {
     private let container: NSPersistentContainer
     private let modelName = "Model"
-    lazy var defaultDeck: Deck = {
-        let deck = Deck(context: viewContext)
-        deck.name = "Default"
-        return deck
-    }()
     
     var viewContext: NSManagedObjectContext {
         container.viewContext
@@ -23,28 +18,34 @@ final class PersistenceManager {
     
     init() {
         container = NSPersistentContainer(name: modelName)
+        setupPersistentContainer()
+    }
+    
+    private func delete(_ object: NSManagedObject) {
+        viewContext.delete(object)
+        saveContextOrRollbackIfFail(viewContext)
+    }
+    
+    private func setupPersistentContainer() {
         container.loadPersistentStores { (description, error) in
             guard error == nil else { fatalError("Failed to load persistent stores") }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func delete(_ object: NSManagedObject) {
-        viewContext.delete(object)
-        saveViewContextOrRollbackIfFail()
-    }
-    
-    private func saveViewContextOrRollbackIfFail() {
+    private func saveContextOrRollbackIfFail(_ context: NSManagedObjectContext) {
+        guard context.hasChanges else { return }
         do {
-            try viewContext.save()
+            try context.save()
         } catch let error {
-            viewContext.rollback()
+            context.rollback()
             print("Failed to save managed object context: \(error)")
         }
     }
 }
 
-// MARK: - Card handling
-extension PersistenceManager {
+// MARK: - Card Manager
+extension PersistenceManager: CardManager {
     func saveCard(question: String, answer: String, in deck: Deck) {
         let card = Card(context: viewContext)
         card.question = question
@@ -52,7 +53,24 @@ extension PersistenceManager {
         card.creationDate = Date()
         card.testDate = Date()
         card.deck = deck
-        saveViewContextOrRollbackIfFail()
+        saveContextOrRollbackIfFail(viewContext)
+    }
+    
+    func updateCard(_ card: Card, question: String? = nil, answer: String? = nil, deck: Deck? = nil) {
+        if let question = question {
+            card.question = question
+        }
+        if let answer = answer {
+            card.answer = answer
+        }
+        if let deck = deck {
+            card.deck = deck
+        }
+        saveContextOrRollbackIfFail(viewContext)
+    }
+    
+    func deleteCard(_ card: Card) {
+        delete(card)
     }
     
     func getAllCards() throws -> [Card] {
@@ -61,16 +79,38 @@ extension PersistenceManager {
     }
 }
 
-// MARK: - Deck handling
-extension PersistenceManager {
+// MARK: - Deck Manager
+extension PersistenceManager: DeckManager {
     func saveDeck(named name: String) {
         let deck = Deck(context: viewContext)
         deck.name = name
-        saveViewContextOrRollbackIfFail()
+        saveContextOrRollbackIfFail(viewContext)
+    }
+    
+    func updateDeck(_ deck: Deck, name: String) {
+        deck.name = name
+        saveContextOrRollbackIfFail(viewContext)
+    }
+    
+    func deleteDeck(_ deck: Deck) {
+        delete(deck)
     }
     
     func getAllDecks() throws -> [Deck] {
         let request: NSFetchRequest<Deck> = Deck.fetchRequest()
+        return try viewContext.fetch(request)
+    }
+    
+    func getDecksToLearn() throws -> [Deck] {
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        guard let date = Calendar.current.date(from: components) else { return [] }
+        
+        let request: NSFetchRequest<Deck> = Deck.fetchRequest()
+        request.predicate = NSPredicate(format: "ANY %K <= %@", #keyPath(Deck.cards.testDate), date as NSDate)
+        //request.sortDescriptors = [NSSortDescriptor(keyPath: \Deck.cards.testDate.count, ascending: false)]
         return try viewContext.fetch(request)
     }
 }
