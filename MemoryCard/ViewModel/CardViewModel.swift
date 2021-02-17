@@ -8,13 +8,15 @@
 import Foundation
 
 final class CardViewModel {
-    private var cardModel: Card
+    private var cardModel: Card!
     var question: Observable<String>
     var answer: Observable<String>
+    var deck: Observable<String>
     
     init(from model: Card) {
         cardModel = model
         question = Observable(model.question ?? "")
         answer = Observable(model.answer ?? "")
+        deck = Observable(model.deck?.name ?? "")
     }
 }

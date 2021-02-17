@@ -17,4 +17,9 @@ final class Observable<T> {
     init(_ value: T) {
         self.value = value
     }
+    
+    func observe(_ observeHandler: @escaping (T) -> Void) {
+        valueDidChange = observeHandler
+        valueDidChange?(value)
+    }
 }

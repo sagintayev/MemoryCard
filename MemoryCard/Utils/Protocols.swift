@@ -17,4 +17,5 @@ protocol DeckManager {
     func updateDeck(_ deck: Deck, name: String)
     func deleteDeck(_ deck: Deck)
     func getAllDecks() throws -> [Deck]
+    func getDeck(byName name: String) throws -> Deck
 }

@@ -101,6 +101,12 @@ extension PersistenceManager: DeckManager {
         return try viewContext.fetch(request)
     }
     
+    func getDeck(byName name: String) throws -> Deck {
+        let request: NSFetchRequest<Deck> = Deck.fetchRequest()
+        request.predicate = NSPredicate(format: "%K == %@", #keyPath(Deck.name), name)
+        return try viewContext.fetch(request)[0]
+    }
+        
     func getDecksToLearn() throws -> [Deck] {
         var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
         components.hour = 23
