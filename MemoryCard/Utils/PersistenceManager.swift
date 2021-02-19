@@ -9,16 +9,21 @@ import Foundation
 import CoreData
 
 final class PersistenceManager {
+    weak var cardObserver: CardObserver?
+    
     private let container: NSPersistentContainer
     private let modelName = "Model"
+    private let notificationCenter: NotificationCenter
     
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }
     
-    init() {
+    init(notificationCenter: NotificationCenter = .default) {
+        self.notificationCenter = notificationCenter
         container = NSPersistentContainer(name: modelName)
         setupPersistentContainer()
+        setupObservers()
     }
     
     private func delete(_ object: NSManagedObject) {
@@ -33,6 +38,24 @@ final class PersistenceManager {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    private func setupObservers() {
+        notificationCenter.addObserver(self, selector: #selector(contextDidSave), name: .NSManagedObjectContextDidSave, object: viewContext)
+    }
+    
+    @objc
+    private func contextDidSave(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        if let inserted = userInfo["inserted"] as? Set<Card> {
+            inserted.forEach { cardObserver?.cardManager(self, didInsertCard: $0) }
+        }
+        if let updated = userInfo["updated"] as? Set<Card> {
+            updated.forEach { cardObserver?.cardManager(self, didUpdateCard: $0) }
+        }
+        if let deleted = userInfo["deleted"] as? Set<Card> {
+            deleted.forEach { cardObserver?.cardManager(self, didDeleteCard: $0) }
+        }
+    }
+    
     private func saveContextOrRollbackIfFail(_ context: NSManagedObjectContext) {
         guard context.hasChanges else { return }
         do {
@@ -41,6 +64,10 @@ final class PersistenceManager {
             context.rollback()
             print("Failed to save managed object context: \(error)")
         }
+    }
+    
+    deinit {
+        notificationCenter.removeObserver(self)
     }
 }
 

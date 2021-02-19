@@ -47,7 +47,7 @@ extension CardsFetchedResultsDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let card = fetchedResultsController.object(at: indexPath)
-        let cardViewModel = CardViewModel(from: card)
+        let cardViewModel = CardViewModel(manager: persistenManager, model: card)
         let cell = tableView.dequeueReusableCell(withIdentifier: CardTableViewCell.identifier, for: indexPath)
         if let cell = cell as? CardTableViewCell {
             cell.setViewModel(cardViewModel)
@@ -62,7 +62,7 @@ extension CardsFetchedResultsDataSource: NSFetchedResultsControllerDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? CardTableViewCell else { return }
         guard let card = anObject as? Card else { return }
         
-        cell.setViewModel(CardViewModel(from: card))
+        cell.setViewModel(CardViewModel(manager: persistenManager, model: card))
         
         switch type {
         case .update:

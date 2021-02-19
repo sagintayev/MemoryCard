@@ -142,7 +142,6 @@ class CardManagerViewController: UIViewController {
         guard let question = questionField.text, let answer = answerField.text, let deckName = deckField.text else { return }
         cardManagerViewModel.saveCard(question: question, answer: answer, deckName: deckName)
         [deckField, questionField, answerField].forEach { $0.resignFirstResponder() }
-        print("Card saved")
     }
     
     private func setupObservers() {

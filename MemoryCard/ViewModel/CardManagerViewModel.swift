@@ -9,9 +9,9 @@ import Foundation
 
 /// The ViewModel is used to create/update/delete a Card and if possible to present the Card data. Changes is persisted to Core Data Store.
 final class CardManagerViewModel {
-    private let manager: CardManager&DeckManager
+    private var manager: CardManager&DeckManager
     private var model: Card?
-    private var cardViewModel: CardViewModel? = nil
+    private var cardViewModel: CardViewModel?
     
     var question: Observable<String>? {
         cardViewModel?.question
@@ -22,22 +22,16 @@ final class CardManagerViewModel {
     var deck: Observable<String>? {
         cardViewModel?.deck
     }
-    var allDecks: Observable<[String]>
-    var buttonText: Observable<String>
+    var allDecks = Observable([""])
+    var buttonText = Observable("")
     
     init(model: Card? = nil, manager: CardManager&DeckManager) {
         self.manager = manager
+        self.cardViewModel = CardViewModel(manager: manager)
+        setModel(model)
+        
         if let decks = try? manager.getAllDecks() {
             allDecks = Observable(decks.compactMap { $0.name })
-        } else {
-            allDecks = Observable([""])
-        }
-        if let model = model {
-            self.model = model
-            cardViewModel = CardViewModel(from: model)
-            buttonText = Observable("Update")
-        } else {
-            buttonText = Observable("Create")
         }
     }
     
@@ -45,11 +39,16 @@ final class CardManagerViewModel {
         if let model = model {
             let deck = try? manager.getDeck(byName: deckName)
             manager.updateCard(model, question: question, answer: answer, deck: deck)
-            self.model = nil
-            self.cardViewModel = nil
         } else {
             guard let deck = try? manager.getDeck(byName: deckName) else { return }
             manager.saveCard(question: question, answer: answer, in: deck)
         }
+        setModel(model)
+    }
+    
+    func setModel(_ model: Card?) {
+        cardViewModel?.setModel(model)
+        buttonText.value = model == nil ? "Create" : "Update"
     }
 }
+
