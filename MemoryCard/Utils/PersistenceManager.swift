@@ -46,13 +46,19 @@ final class PersistenceManager {
     private func contextDidSave(_ notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         if let inserted = userInfo["inserted"] as? Set<Card> {
-            inserted.forEach { cardObserver?.cardManager(self, didInsertCard: $0) }
+            inserted.forEach {
+                notificationCenter.post(name: .CardDidChange, object: self, userInfo: ["card": $0, "action": Action.create])
+            }
         }
         if let updated = userInfo["updated"] as? Set<Card> {
-            updated.forEach { cardObserver?.cardManager(self, didUpdateCard: $0) }
+            updated.forEach {
+                notificationCenter.post(name: .CardDidChange, object: self, userInfo: ["card": $0, "action": Action.update])
+            }
         }
         if let deleted = userInfo["deleted"] as? Set<Card> {
-            deleted.forEach { cardObserver?.cardManager(self, didDeleteCard: $0) }
+            deleted.forEach {
+                notificationCenter.post(name: .CardDidChange, object: self, userInfo: ["card": $0, "action": Action.delete])
+            }
         }
     }
     
@@ -94,6 +100,7 @@ extension PersistenceManager: CardManager {
             card.deck = deck
         }
         saveContextOrRollbackIfFail(viewContext)
+        viewContext.refreshAllObjects()
     }
     
     func deleteCard(_ card: Card) {

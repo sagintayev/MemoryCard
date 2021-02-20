@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
+		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
 		AC9888FD25D170280042AA8E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9888FC25D170280042AA8E /* Protocols.swift */; };
 		AC98890025D1708B0042AA8E /* DecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9888FF25D1708B0042AA8E /* DecksViewModel.swift */; };
 		ACFDAF0125D699220029DF28 /* CardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFDAF0025D699220029DF28 /* CardManagerViewController.swift */; };
@@ -30,7 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+CustomNames.swift"; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
+		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		AC9888FC25D170280042AA8E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		AC9888FF25D1708B0042AA8E /* DecksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DecksViewModel.swift; path = ../../../../.Trash/DecksViewModel.swift; sourceTree = "<group>"; };
 		ACFDAF0025D699220029DF28 /* CardManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				F703CBD825C3FECD001BDC4A /* UIView+embed().swift */,
+				AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				F71F799025BB07AF009416EE /* Model.xcdatamodeld */,
+				AC792A8525E17614006CCAA6 /* Action.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,10 +232,12 @@
 				AC98890025D1708B0042AA8E /* DecksViewModel.swift in Sources */,
 				F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */,
 				F71F799225BB07AF009416EE /* Model.xcdatamodeld in Sources */,
+				AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */,
 				AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */,
 				ACFDAF0125D699220029DF28 /* CardManagerViewController.swift in Sources */,
 				F703CBD925C3FECD001BDC4A /* UIView+embed().swift in Sources */,
 				F7C18A1425C026E200317C69 /* DeckCollectionViewCell.swift in Sources */,
+				AC792A8625E17614006CCAA6 /* Action.swift in Sources */,
 				F789766925CAA3EB009DC5B9 /* CardViewModel.swift in Sources */,
 				F706189625BFFF6700E871C5 /* HomeViewController.swift in Sources */,
 				F789766E25CAC06B009DC5B9 /* Observable.swift in Sources */,
