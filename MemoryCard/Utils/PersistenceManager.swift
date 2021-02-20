@@ -9,7 +9,6 @@ import Foundation
 import CoreData
 
 final class PersistenceManager {
-    weak var cardObserver: CardObserver?
     
     private let container: NSPersistentContainer
     private let modelName = "Model"

@@ -58,20 +58,3 @@ final class CardViewModel {
         notificationCenter.removeObserver(self)
     }
 }
-
-extension CardViewModel: CardObserver {
-    func cardManager(_ cardManager: CardManager, didInsertCard card: Card) {
-        guard card == model else { return }
-        updateProperties()
-    }
-    
-    func cardManager(_ cardManager: CardManager, didUpdateCard card: Card) {
-        guard card == model else { return }
-        updateProperties()
-    }
-    
-    func cardManager(_ cardManager: CardManager, didDeleteCard card: Card) {
-        guard card == model else { return }
-        updateProperties()
-    }
-}

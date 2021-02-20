@@ -6,7 +6,6 @@
 //
 
 protocol CardManager {
-    var cardObserver: CardObserver? { get set }
     func saveCard(question: String, answer: String, in deck: Deck)
     func updateCard(_ card: Card, question: String?, answer: String?, deck: Deck?)
     func deleteCard(_ card: Card)
@@ -19,10 +18,4 @@ protocol DeckManager {
     func deleteDeck(_ deck: Deck)
     func getAllDecks() throws -> [Deck]
     func getDeck(byName name: String) throws -> Deck
-}
-
-protocol CardObserver: AnyObject {
-    func cardManager(_ cardManager: CardManager, didInsertCard card: Card)
-    func cardManager(_ cardManager: CardManager, didUpdateCard card: Card)
-    func cardManager(_ cardManager: CardManager, didDeleteCard card: Card)
 }
