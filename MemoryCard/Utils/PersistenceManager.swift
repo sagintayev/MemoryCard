@@ -60,6 +60,22 @@ final class PersistenceManager {
                 notificationCenter.post(name: .CardDidChange, object: self, userInfo: ["card": $0, "action": Action.delete])
             }
         }
+        
+        if let inserted = userInfo["inserted"] as? Set<Deck> {
+            inserted.forEach {
+                notificationCenter.post(name: .DeckDidChange, object: self, userInfo: ["deck": $0, "action": Action.create])
+            }
+        }
+        if let updated = userInfo["updated"] as? Set<Deck> {
+            updated.forEach {
+                notificationCenter.post(name: .DeckDidChange, object: self, userInfo: ["deck": $0, "action": Action.update])
+            }
+        }
+        if let deleted = userInfo["deleted"] as? Set<Deck> {
+            deleted.forEach {
+                notificationCenter.post(name: .DeckDidChange, object: self, userInfo: ["deck": $0, "action": Action.delete])
+            }
+        }
     }
     
     private func saveContextOrRollbackIfFail(_ context: NSManagedObjectContext) {

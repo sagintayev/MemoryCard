@@ -12,6 +12,7 @@ final class CardManagerViewModel {
     private var manager: CardManager&DeckManager
     private var model: Card?
     private var cardViewModel: CardViewModel?
+    private let notificationCenter: NotificationCenter
     
     var question: Observable<String>? {
         cardViewModel?.question
@@ -25,9 +26,11 @@ final class CardManagerViewModel {
     var allDecks = Observable([""])
     var buttonText = Observable("")
     
-    init(model: Card? = nil, manager: CardManager&DeckManager) {
+    init(model: Card? = nil, manager: CardManager&DeckManager, notificationCenter: NotificationCenter = .default) {
         self.manager = manager
-        self.cardViewModel = CardViewModel(manager: manager)
+        self.notificationCenter = notificationCenter
+        self.cardViewModel = CardViewModel(manager: manager, notificationCenter: notificationCenter)
+
         setModel(model)
         
         if let decks = try? manager.getAllDecks() {
@@ -49,6 +52,21 @@ final class CardManagerViewModel {
     func setModel(_ model: Card?) {
         cardViewModel?.setModel(model)
         buttonText.value = model == nil ? "Create" : "Update"
+    }
+    
+    private func setObservers() {
+        notificationCenter.addObserver(self, selector: #selector(deckNotificationRecieved), name: .DeckDidChange, object: nil)
+    }
+    
+    @objc
+    private func deckNotificationRecieved(_ notification: Notification) {
+        if let decks = try? manager.getAllDecks() {
+            allDecks.value = decks.compactMap { $0.name }
+        }
+    }
+    
+    deinit {
+        notificationCenter.removeObserver(self)
     }
 }
 
