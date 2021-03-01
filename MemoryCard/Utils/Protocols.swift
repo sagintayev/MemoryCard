@@ -10,6 +10,7 @@ protocol CardManager {
     func updateCard(_ card: Card, question: String?, answer: String?, deck: Deck?)
     func deleteCard(_ card: Card)
     func getAllCards() throws -> [Card]
+    func answerCard(_ card: Card, withComplexity complexity: AnswerComplexity)
 }
 
 protocol DeckManager {
@@ -18,4 +19,5 @@ protocol DeckManager {
     func deleteDeck(_ deck: Deck)
     func getAllDecks() throws -> [Deck]
     func getDeck(byName name: String) throws -> Deck
+    func getCardsToLearn(from deck: Deck) throws -> [Card]
 }

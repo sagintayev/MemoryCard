@@ -10,13 +10,14 @@ import CoreData
 
 final class PersistenceManager {
     
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
+    
     private let container: NSPersistentContainer
     private let modelName = "Model"
     private let notificationCenter: NotificationCenter
     
-    var viewContext: NSManagedObjectContext {
-        container.viewContext
-    }
     
     init(notificationCenter: NotificationCenter = .default) {
         self.notificationCenter = notificationCenter
@@ -115,7 +116,16 @@ extension PersistenceManager: CardManager {
             card.deck = deck
         }
         saveContextOrRollbackIfFail(viewContext)
-        viewContext.refreshAllObjects()
+        //viewContext.refreshAllObjects()
+    }
+    
+    func answerCard(_ card: Card, withComplexity complexity: AnswerComplexity) {
+        let multiplier = Int(max(card.correctAnswersChain, 1))
+        let nextTestDate = Calendar.current.date(byAdding: .day, value: complexity.daysUntilNextCheck(multiplier: multiplier), to: card.testDate ?? Date()) ?? Date()
+        card.testDate = nextTestDate
+        card.correctAnswersChain = (complexity == AnswerComplexity.impossible) ? 0 : +1
+        saveContextOrRollbackIfFail(viewContext)
+        //viewContext.refresh(card, mergeChanges: true)
     }
     
     func deleteCard(_ card: Card) {
@@ -157,15 +167,25 @@ extension PersistenceManager: DeckManager {
     }
         
     func getDecksToLearn() throws -> [Deck] {
-        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
-        components.hour = 23
-        components.minute = 59
-        components.second = 59
-        guard let date = Calendar.current.date(from: components) else { return [] }
-        
+        guard let date = getTodayLastMoment() else { return [] }
         let request: NSFetchRequest<Deck> = Deck.fetchRequest()
         request.predicate = NSPredicate(format: "ANY %K <= %@", #keyPath(Deck.cards.testDate), date as NSDate)
         //request.sortDescriptors = [NSSortDescriptor(keyPath: \Deck.cards.testDate.count, ascending: false)]
         return try viewContext.fetch(request)
+    }
+    
+    func getCardsToLearn(from deck: Deck) throws -> [Card] {
+        guard let date = getTodayLastMoment() else { return [] }
+        let request: NSFetchRequest<Card> = Card.fetchRequest()
+        request.predicate = NSPredicate(format: "%K == %@ AND %K <= %@", #keyPath(Card.deck.name), deck.name!, #keyPath(Card.testDate), date as NSDate)
+        return try viewContext.fetch(request)
+    }
+    
+    private func getTodayLastMoment() -> Date? {
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: Date())
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        return Calendar.current.date(from: components)
     }
 }
