@@ -11,9 +11,11 @@ class DecksTableViewCell: UITableViewCell {
     static let identifier = "deck-collection-view-cell"
     
     var titles: [String]?
+    var counts: [Int]?
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        collectionView.clipsToBounds = false
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
@@ -25,6 +27,9 @@ class DecksTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = UICollectionViewFlowLayout.automaticSize
+        layout.minimumLineSpacing = 30
+        layout.sectionInset.left = 10
+        layout.sectionInset.right = 30
         return layout
     }()
     
@@ -54,11 +59,6 @@ class DecksTableViewCell: UITableViewCell {
         collectionView.delegate = self
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        collectionViewLayout.invalidateLayout()
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -74,6 +74,7 @@ extension DecksTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeckCollectionViewCell.identifier, for: indexPath)
         if let cell = cell as? DeckCollectionViewCell {
             cell.title = titles?[indexPath.item]
+            cell.count = counts?[indexPath.item]
         }
         return cell
     }

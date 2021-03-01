@@ -19,5 +19,6 @@ protocol DeckManager {
     func deleteDeck(_ deck: Deck)
     func getAllDecks() throws -> [Deck]
     func getDeck(byName name: String) throws -> Deck
+    func getDecksToLearn() throws -> [Deck]
     func getCardsToLearn(from deck: Deck) throws -> [Card]
 }

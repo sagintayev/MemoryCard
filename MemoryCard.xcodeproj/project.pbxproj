@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */; };
 		AC0E06A625E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */; };
+		AC212E8025EBBA56002869AC /* LearningDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
 		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
 		AC8C98E625E5095000CE1B65 /* LearningCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C98E525E5095000CE1B65 /* LearningCardViewModel.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+CustomNames.swift"; sourceTree = "<group>"; };
 		AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+withPriority().swift"; sourceTree = "<group>"; };
+		AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningDecksViewModel.swift; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
 		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		AC8C98E525E5095000CE1B65 /* LearningCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardViewModel.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				F789766825CAA3EB009DC5B9 /* CardViewModel.swift */,
 				AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */,
 				AC8C98E525E5095000CE1B65 /* LearningCardViewModel.swift */,
+				AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				F703CBD925C3FECD001BDC4A /* UIView+embed().swift in Sources */,
 				AC94B46725E3742800EB497C /* LearningCardViewController.swift in Sources */,
 				F7C18A1425C026E200317C69 /* DeckCollectionViewCell.swift in Sources */,
+				AC212E8025EBBA56002869AC /* LearningDecksViewModel.swift in Sources */,
 				AC9B4C1525E9035700047297 /* AnswerComplexity.swift in Sources */,
 				AC792A8625E17614006CCAA6 /* Action.swift in Sources */,
 				F789766925CAA3EB009DC5B9 /* CardViewModel.swift in Sources */,

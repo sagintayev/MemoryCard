@@ -14,6 +14,14 @@ class DeckCollectionViewCell: UICollectionViewCell {
         didSet { titleLabel.text = title }
     }
     
+    var count: Int? {
+        didSet {
+            guard let count = count else { return }
+            countLabel.text = String(count)
+            countLabel.layoutIfNeeded()
+        }
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -31,16 +39,25 @@ class DeckCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private let countLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.layer.masksToBounds = true
+        label.backgroundColor = UIColor.red
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .gray
-        clipsToBounds = true
-        
         setupSubviews()
     }
     
     private func setupSubviews() {
-        [titleLabel, bodyView].forEach { contentView.addSubview($0) }
+        [titleLabel, bodyView, countLabel].forEach { contentView.addSubview($0) }
         
         let constraints = [
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -49,7 +66,10 @@ class DeckCollectionViewCell: UICollectionViewCell {
             bodyView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             bodyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             bodyView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            bodyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            bodyView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            countLabel.widthAnchor.constraint(greaterThanOrEqualTo: countLabel.heightAnchor),
+            countLabel.centerXAnchor.constraint(equalTo: contentView.trailingAnchor),
+            countLabel.centerYAnchor.constraint(equalTo: contentView.topAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -57,7 +77,9 @@ class DeckCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = bounds.width / 15
+        countLabel.layer.cornerRadius = countLabel.bounds.width / 2
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

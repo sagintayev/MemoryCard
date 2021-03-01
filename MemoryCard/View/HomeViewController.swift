@@ -9,6 +9,8 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
+    private let learningDecksViewModel: LearningDecksViewModel?
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .blue
@@ -17,7 +19,12 @@ final class HomeViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
+    
+    init(manager: DeckManager&CardManager) {
+        learningDecksViewModel = LearningDecksViewModel(manager: manager)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
@@ -42,6 +49,10 @@ final class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - Table View Data Source
@@ -53,7 +64,12 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DecksTableViewCell.identifier, for: indexPath)
         if let cell = cell as? DecksTableViewCell {
-            cell.titles = ["Kazakh", "ProgrammingProgrammingProgrammingProgramming", "Music", "Kazakh", "Programming", "Music", "Kazakh", "Programming", "Music", "Kazakh", "Programming", "Music", "Kazakh", "Programming", "Music"]
+            learningDecksViewModel?.decksTitles.observe { titles in
+                cell.titles = titles
+            }
+            learningDecksViewModel?.decksCardsCounts.observe { counts in
+                cell.counts = counts
+            }
         }
         return cell
     }
