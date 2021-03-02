@@ -13,6 +13,7 @@ class LearningDecksViewModel {
     
     var decksTitles = Observable([""])
     var decksCardsCounts: Observable<[Int]> = Observable([])
+    var deckWasChosen: ((Deck) -> Void)?
     
     init?(manager: DeckManager, notificationCenter: NotificationCenter = .default) {
         guard let decks = try? manager.getDecksToLearn() else { return nil }
@@ -20,5 +21,10 @@ class LearningDecksViewModel {
         self.notificationCenter = notificationCenter
         decksTitles.value = decks.compactMap { $0.name }
         decksCardsCounts.value = decks.compactMap { try? manager.getCardsToLearn(from: $0).count }
+    }
+    
+    func chooseDeck(at index: Int) {
+        guard decks.count > index else { return }
+        deckWasChosen?(decks[index])
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    weak var coordinator: Coordinator?
     
     private let learningDecksViewModel: LearningDecksViewModel?
     
@@ -20,14 +21,15 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
-    init(manager: DeckManager&CardManager) {
-        learningDecksViewModel = LearningDecksViewModel(manager: manager)
+    init(learningDecksViewModel: LearningDecksViewModel?) {
+        self.learningDecksViewModel = learningDecksViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
+        setupNavItem()
     }
     
     private func setupSubviews() {
@@ -48,6 +50,15 @@ final class HomeViewController: UIViewController {
         tableView.register(DecksTableViewCell.self, forCellReuseIdentifier: DecksTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    private func setupNavItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searcBarButtonTapped))
+    }
+    
+    @objc
+    private func searcBarButtonTapped() {
+
     }
     
     required init?(coder: NSCoder) {

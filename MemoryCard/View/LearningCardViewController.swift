@@ -9,6 +9,7 @@ import UIKit
 
 class LearningCardViewController: UIViewController {
     
+    weak var coordinator: Coordinator?
     var learningCardViewModel: LearningCardViewModel
     
     init(viewModel: LearningCardViewModel) {
@@ -38,6 +39,7 @@ class LearningCardViewController: UIViewController {
         button.backgroundColor = .blue
         button.setTitle("Go home", for: .normal)
         button.layer.cornerRadius = 15
+        button.addTarget(self, action: #selector(finishedButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -225,6 +227,11 @@ class LearningCardViewController: UIViewController {
     @objc
     private func answerButtonTapped(_ sender: UIButton) {
         learningCardViewModel.answerCard(buttonIndex: sender.tag)
+    }
+    
+    @objc
+    private func finishedButtonTapped() {
+        coordinator?.backHome()
     }
     
     required init?(coder: NSCoder) {

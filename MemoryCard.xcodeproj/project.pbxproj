@@ -12,6 +12,7 @@
 		AC212E8025EBBA56002869AC /* LearningDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
 		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
+		AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */; };
 		AC8C98E625E5095000CE1B65 /* LearningCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C98E525E5095000CE1B65 /* LearningCardViewModel.swift */; };
 		AC94B46725E3742800EB497C /* LearningCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94B46625E3742800EB497C /* LearningCardViewController.swift */; };
 		AC9888FD25D170280042AA8E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9888FC25D170280042AA8E /* Protocols.swift */; };
@@ -41,6 +42,7 @@
 		AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningDecksViewModel.swift; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
 		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		AC8C98E525E5095000CE1B65 /* LearningCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardViewModel.swift; sourceTree = "<group>"; };
 		AC94B46625E3742800EB497C /* LearningCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardViewController.swift; sourceTree = "<group>"; };
 		AC9888FC25D170280042AA8E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				F78048E525C408E100A2EDEC /* CardsFetchedResultsDataSource.swift */,
 				F789766D25CAC06B009DC5B9 /* Observable.swift */,
 				AC9888FC25D170280042AA8E /* Protocols.swift */,
+				AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				F789766E25CAC06B009DC5B9 /* Observable.swift in Sources */,
 				AC8C98E625E5095000CE1B65 /* LearningCardViewModel.swift in Sources */,
 				F7C18A0F25C023C000317C69 /* DecksTableViewCell.swift in Sources */,
+				AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */,
 				F789766525CA91A9009DC5B9 /* CardView.swift in Sources */,
 				F78048E625C408E100A2EDEC /* CardsFetchedResultsDataSource.swift in Sources */,
 			);
