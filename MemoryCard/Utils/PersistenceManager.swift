@@ -121,7 +121,7 @@ extension PersistenceManager: CardManager {
     
     func answerCard(_ card: Card, withComplexity complexity: AnswerComplexity) {
         let multiplier = Int(max(card.correctAnswersChain, 1))
-        let nextTestDate = Calendar.current.date(byAdding: .day, value: complexity.daysUntilNextCheck(multiplier: multiplier), to: card.testDate ?? Date()) ?? Date()
+        let nextTestDate = Calendar.current.date(byAdding: .day, value: complexity.daysUntilNextCheck(multiplier: multiplier), to: card.testDate ) ?? Date()
         card.testDate = nextTestDate
         card.correctAnswersChain = (complexity == AnswerComplexity.impossible) ? 0 : +1
         saveContextOrRollbackIfFail(viewContext)
@@ -177,7 +177,7 @@ extension PersistenceManager: DeckManager {
     func getCardsToLearn(from deck: Deck) throws -> [Card] {
         guard let date = getTodayLastMoment() else { return [] }
         let request: NSFetchRequest<Card> = Card.fetchRequest()
-        request.predicate = NSPredicate(format: "%K == %@ AND %K <= %@", #keyPath(Card.deck.name), deck.name!, #keyPath(Card.testDate), date as NSDate)
+        request.predicate = NSPredicate(format: "%K == %@ AND %K <= %@", #keyPath(Card.deck.name), deck.name, #keyPath(Card.testDate), date as NSDate)
         return try viewContext.fetch(request)
     }
     

@@ -30,7 +30,7 @@ final class CardViewModel {
     private func updateProperties() {
         question.value = model?.question ?? ""
         answer.value = model?.answer ?? ""
-        deck.value = model?.deck?.name ?? ""
+        deck.value = model?.deck.name ?? ""
     }
     
     private func setObservers() {

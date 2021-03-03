@@ -17,6 +17,10 @@
 		AC94B46725E3742800EB497C /* LearningCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC94B46625E3742800EB497C /* LearningCardViewController.swift */; };
 		AC9888FD25D170280042AA8E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9888FC25D170280042AA8E /* Protocols.swift */; };
 		AC9B4C1525E9035700047297 /* AnswerComplexity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B4C1425E9035700047297 /* AnswerComplexity.swift */; };
+		ACD20D4225EF85A6001B3B07 /* Card+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD20D3E25EF85A6001B3B07 /* Card+CoreDataClass.swift */; };
+		ACD20D4325EF85A6001B3B07 /* Card+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD20D3F25EF85A6001B3B07 /* Card+CoreDataProperties.swift */; };
+		ACD20D4425EF85A7001B3B07 /* Deck+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD20D4025EF85A6001B3B07 /* Deck+CoreDataClass.swift */; };
+		ACD20D4525EF85A7001B3B07 /* Deck+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD20D4125EF85A6001B3B07 /* Deck+CoreDataProperties.swift */; };
 		ACFDAF0125D699220029DF28 /* CardManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFDAF0025D699220029DF28 /* CardManagerViewController.swift */; };
 		F703CBD525C3FD8D001BDC4A /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703CBD425C3FD8D001BDC4A /* CardsViewController.swift */; };
 		F703CBD925C3FECD001BDC4A /* UIView+embed().swift in Sources */ = {isa = PBXBuildFile; fileRef = F703CBD825C3FECD001BDC4A /* UIView+embed().swift */; };
@@ -47,6 +51,10 @@
 		AC94B46625E3742800EB497C /* LearningCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardViewController.swift; sourceTree = "<group>"; };
 		AC9888FC25D170280042AA8E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		AC9B4C1425E9035700047297 /* AnswerComplexity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerComplexity.swift; sourceTree = "<group>"; };
+		ACD20D3E25EF85A6001B3B07 /* Card+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACD20D3F25EF85A6001B3B07 /* Card+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACD20D4025EF85A6001B3B07 /* Deck+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACD20D4125EF85A6001B3B07 /* Deck+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Deck+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACFDAF0025D699220029DF28 /* CardManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewController.swift; sourceTree = "<group>"; };
 		F703CBD425C3FD8D001BDC4A /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		F703CBD825C3FECD001BDC4A /* UIView+embed().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+embed().swift"; sourceTree = "<group>"; };
@@ -107,6 +115,10 @@
 		F71F798C25BAFEB1009416EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ACD20D3E25EF85A6001B3B07 /* Card+CoreDataClass.swift */,
+				ACD20D3F25EF85A6001B3B07 /* Card+CoreDataProperties.swift */,
+				ACD20D4025EF85A6001B3B07 /* Deck+CoreDataClass.swift */,
+				ACD20D4125EF85A6001B3B07 /* Deck+CoreDataProperties.swift */,
 				F71F799025BB07AF009416EE /* Model.xcdatamodeld */,
 				AC792A8525E17614006CCAA6 /* Action.swift */,
 				AC9B4C1425E9035700047297 /* AnswerComplexity.swift */,
@@ -245,11 +257,15 @@
 				F78048EA25C4279F00A2EDEC /* CardTableViewCell.swift in Sources */,
 				F7E3DAC725BC0ECF0077A732 /* PersistenceManager.swift in Sources */,
 				F7DDFF8225BAAA9200BF9D75 /* AppDelegate.swift in Sources */,
+				ACD20D4325EF85A6001B3B07 /* Card+CoreDataProperties.swift in Sources */,
 				F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */,
 				F71F799225BB07AF009416EE /* Model.xcdatamodeld in Sources */,
+				ACD20D4525EF85A7001B3B07 /* Deck+CoreDataProperties.swift in Sources */,
 				AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */,
+				ACD20D4425EF85A7001B3B07 /* Deck+CoreDataClass.swift in Sources */,
 				AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */,
 				ACFDAF0125D699220029DF28 /* CardManagerViewController.swift in Sources */,
+				ACD20D4225EF85A6001B3B07 /* Card+CoreDataClass.swift in Sources */,
 				F703CBD925C3FECD001BDC4A /* UIView+embed().swift in Sources */,
 				AC94B46725E3742800EB497C /* LearningCardViewController.swift in Sources */,
 				F7C18A1425C026E200317C69 /* DeckCollectionViewCell.swift in Sources */,

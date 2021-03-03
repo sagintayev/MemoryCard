@@ -19,7 +19,7 @@ final class CardsFetchedResultsDataSource: NSObject {
         return fetchRequest
     }
     private let fetchSortDescriptors = [NSSortDescriptor(keyPath: \Card.question, ascending: false)]
-    private lazy var fetchPredicate = NSPredicate(format: "%K == %@", #keyPath(Card.deck.name), deck.name!)
+    private lazy var fetchPredicate = NSPredicate(format: "%K == %@", #keyPath(Card.deck.name), deck.name)
     private let persistenManager = PersistenceManager()
     private lazy var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: persistenManager.viewContext, sectionNameKeyPath: nil, cacheName: nil)
     
