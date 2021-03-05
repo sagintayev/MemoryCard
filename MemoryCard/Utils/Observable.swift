@@ -12,7 +12,7 @@ final class Observable<T> {
         didSet { valueDidChange?(value) }
     }
     
-    var valueDidChange: ((T) -> Void)?
+    private var valueDidChange: ((T) -> Void)?
     
     init(_ value: T) {
         self.value = value
@@ -21,5 +21,9 @@ final class Observable<T> {
     func observe(_ observeHandler: @escaping (T) -> Void) {
         valueDidChange = observeHandler
         valueDidChange?(value)
+    }
+    
+    func removeObserver() {
+        valueDidChange = nil
     }
 }

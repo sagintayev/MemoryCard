@@ -10,6 +10,7 @@
 		AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */; };
 		AC0E06A625E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */; };
 		AC212E8025EBBA56002869AC /* LearningDecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */; };
+		AC29C89E25EE54C8007262F7 /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
 		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
 		AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */; };
@@ -26,7 +27,6 @@
 		F703CBD925C3FECD001BDC4A /* UIView+embed().swift in Sources */ = {isa = PBXBuildFile; fileRef = F703CBD825C3FECD001BDC4A /* UIView+embed().swift */; };
 		F706189625BFFF6700E871C5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F706189525BFFF6700E871C5 /* HomeViewController.swift */; };
 		F71F799225BB07AF009416EE /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F71F799025BB07AF009416EE /* Model.xcdatamodeld */; };
-		F78048E625C408E100A2EDEC /* CardsFetchedResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78048E525C408E100A2EDEC /* CardsFetchedResultsDataSource.swift */; };
 		F78048EA25C4279F00A2EDEC /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78048E925C4279F00A2EDEC /* CardTableViewCell.swift */; };
 		F789766525CA91A9009DC5B9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F789766425CA91A9009DC5B9 /* CardView.swift */; };
 		F789766925CAA3EB009DC5B9 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F789766825CAA3EB009DC5B9 /* CardViewModel.swift */; };
@@ -44,6 +44,7 @@
 		AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+CustomNames.swift"; sourceTree = "<group>"; };
 		AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+withPriority().swift"; sourceTree = "<group>"; };
 		AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningDecksViewModel.swift; sourceTree = "<group>"; };
+		AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
 		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -60,7 +61,6 @@
 		F703CBD825C3FECD001BDC4A /* UIView+embed().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+embed().swift"; sourceTree = "<group>"; };
 		F706189525BFFF6700E871C5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F71F799125BB07AF009416EE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		F78048E525C408E100A2EDEC /* CardsFetchedResultsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsFetchedResultsDataSource.swift; sourceTree = "<group>"; };
 		F78048E925C4279F00A2EDEC /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		F789766425CA91A9009DC5B9 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		F789766825CAA3EB009DC5B9 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -133,6 +133,7 @@
 				AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */,
 				AC8C98E525E5095000CE1B65 /* LearningCardViewModel.swift */,
 				AC212E7F25EBBA56002869AC /* LearningDecksViewModel.swift */,
+				AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -174,7 +175,6 @@
 			children = (
 				F703CBD725C3FEA4001BDC4A /* Extensions */,
 				F7E3DAC625BC0ECF0077A732 /* PersistenceManager.swift */,
-				F78048E525C408E100A2EDEC /* CardsFetchedResultsDataSource.swift */,
 				F789766D25CAC06B009DC5B9 /* Observable.swift */,
 				AC9888FC25D170280042AA8E /* Protocols.swift */,
 				AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */,
@@ -264,6 +264,7 @@
 				AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */,
 				ACD20D4425EF85A7001B3B07 /* Deck+CoreDataClass.swift in Sources */,
 				AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */,
+				AC29C89E25EE54C8007262F7 /* CardsViewModel.swift in Sources */,
 				ACFDAF0125D699220029DF28 /* CardManagerViewController.swift in Sources */,
 				ACD20D4225EF85A6001B3B07 /* Card+CoreDataClass.swift in Sources */,
 				F703CBD925C3FECD001BDC4A /* UIView+embed().swift in Sources */,
@@ -279,7 +280,6 @@
 				F7C18A0F25C023C000317C69 /* DecksTableViewCell.swift in Sources */,
 				AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */,
 				F789766525CA91A9009DC5B9 /* CardView.swift in Sources */,
-				F78048E625C408E100A2EDEC /* CardsFetchedResultsDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

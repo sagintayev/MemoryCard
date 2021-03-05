@@ -8,13 +8,11 @@
 import UIKit
 
 class CardsViewController: UIViewController {
-    var deck: Deck
     
-    private lazy var tableViewDataSource = CardsFetchedResultsDataSource(tableView: tableView, deck: deck)
+    private let cardsViewModel: CardsViewModel
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .systemGray4
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -22,10 +20,13 @@ class CardsViewController: UIViewController {
     private lazy var headerView: UIView = {
         let questionLabel = getLabel()
         let answerLabel = getLabel()
+        let testDateLabel = getLabel()
+        
         questionLabel.text = "Question"
         answerLabel.text = "Answer"
+        testDateLabel.text = "Test Date"
         
-        let stackView = UIStackView(arrangedSubviews: [questionLabel, answerLabel])
+        let stackView = UIStackView(arrangedSubviews: [questionLabel, answerLabel, testDateLabel])
         stackView.alignment = .top
         stackView.spacing = .zero
         stackView.axis = .horizontal
@@ -38,14 +39,16 @@ class CardsViewController: UIViewController {
         return headerView
     }()
     
-    init(deck: Deck) {
-        self.deck = deck
+    init(cardsViewModel: CardsViewModel) {
+        self.cardsViewModel = cardsViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     private func getLabel() -> UILabel {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title2)
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
@@ -62,7 +65,7 @@ class CardsViewController: UIViewController {
     
     private func setupTableView() {
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: CardTableViewCell.identifier)
-        tableView.dataSource = tableViewDataSource
+        tableView.dataSource = self
         tableView.delegate = self
         tableView.tableHeaderView = headerView
     }
@@ -70,6 +73,22 @@ class CardsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension CardsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        cardsViewModel.cardViewModels?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CardTableViewCell.identifier, for: indexPath)
+        if let cardViewModel = cardsViewModel.cardViewModels?[indexPath.row], let cell = cell as? CardTableViewCell {
+            cell.setViewModel(cardViewModel)
+        }
+        return cell
+    }
+    
+    
 }
 
 // MARK: - Table View Delegate

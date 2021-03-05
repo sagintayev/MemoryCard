@@ -14,23 +14,38 @@ final class CardViewModel {
     var question = Observable("")
     var answer = Observable("")
     var deck = Observable("")
+    var testDate = Observable("")
     
     init(manager: CardManager, model: Card? = nil, notificationCenter: NotificationCenter = .default) {
         self.manager = manager
         self.notificationCenter = notificationCenter
         setModel(model)
+        setObservers()
     }
     
     func setModel(_ model: Card? = nil) {
         self.model = model
         updateProperties()
-        setObservers()
+    }
+    
+    func removeObservers() {
+        [question, answer, deck, testDate].forEach {
+            $0.removeObserver()
+        }
     }
     
     private func updateProperties() {
-        question.value = model?.question ?? ""
-        answer.value = model?.answer ?? ""
-        deck.value = model?.deck.name ?? ""
+        guard let model = model else {
+            [question, answer, deck, testDate].forEach {
+                $0.value = ""
+            }
+            return
+        }
+        question.value = model.question
+        answer.value = model.answer
+        deck.value = model.deck.name
+        let testDateComponents = Calendar.current.dateComponents([.day, .month], from: model.testDate)
+        testDate.value = "\(testDateComponents.day!)/\(testDateComponents.month!)"
     }
     
     private func setObservers() {
