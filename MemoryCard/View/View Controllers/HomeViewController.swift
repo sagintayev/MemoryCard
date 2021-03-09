@@ -32,6 +32,12 @@ final class HomeViewController: UIViewController {
         setupNavItem()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        learningDecksViewModel?.refresh()
+        tableView.reloadData()
+    }
+    
     private func setupSubviews() {
         view.addSubview(tableView)
         
@@ -69,17 +75,25 @@ final class HomeViewController: UIViewController {
 // MARK: - Table View Data Source
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0:
+            return ((learningDecksViewModel?.decksTitles.value.count ?? 0) > 0) ? 1 : 0
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DecksTableViewCell.identifier, for: indexPath)
         if let cell = cell as? DecksTableViewCell {
             learningDecksViewModel?.decksTitles.observe { titles in
-                cell.titles = titles
+                cell.deckNames = titles
             }
             learningDecksViewModel?.decksCardsCounts.observe { counts in
-                cell.counts = counts
+                cell.deckCardsToLearnCount = counts
+            }
+            cell.didTapOnDeck = { [weak self] (deckName) in
+                self?.coordinator?.learnDeck(withName: deckName)
             }
         }
         return cell

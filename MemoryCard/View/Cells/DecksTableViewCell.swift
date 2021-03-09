@@ -10,8 +10,10 @@ import UIKit
 class DecksTableViewCell: UITableViewCell {
     static let identifier = "deck-collection-view-cell"
     
-    var titles: [String]?
-    var counts: [Int]?
+    var didTapOnDeck: ((String) -> Void)?
+    
+    var deckNames: [String]?
+    var deckCardsToLearnCount: [Int]?
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
@@ -67,14 +69,14 @@ class DecksTableViewCell: UITableViewCell {
 // MARK: - CollectionView Data Source
 extension DecksTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return titles?.count ?? 0
+        return deckNames?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeckCollectionViewCell.identifier, for: indexPath)
         if let cell = cell as? DeckCollectionViewCell {
-            cell.title = titles?[indexPath.item]
-            cell.count = counts?[indexPath.item]
+            cell.title = deckNames?[indexPath.item]
+            cell.count = deckCardsToLearnCount?[indexPath.item]
         }
         return cell
     }
@@ -86,5 +88,13 @@ extension DecksTableViewCell: UICollectionViewDelegateFlowLayout {
         let height = collectionView.bounds.height
         let width = height * 1.3
         return CGSize(width: width, height: height)
+    }
+}
+
+extension DecksTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let deckNames = deckNames, indexPath.item < deckNames.count else { return }
+        let deckName = deckNames[indexPath.item]
+        didTapOnDeck?(deckName)
     }
 }

@@ -17,7 +17,7 @@ extension Card {
     }
 
     @NSManaged public var answer: String
-    @NSManaged public var correctAnswersChain: Int
+    @NSManaged public var correctAnswersChain: Int16
     @NSManaged public var creationDate: Date
     @NSManaged public var question: String
     @NSManaged public var testDate: Date

@@ -8,23 +8,31 @@
 import Foundation
 
 class LearningDecksViewModel {
-    private var decks: [Deck]
+    private var decks: [Deck] {
+        didSet { decksDidChange() }
+    }
     private let notificationCenter: NotificationCenter
+    private let manager: DeckManager
     
     var decksTitles = Observable([""])
     var decksCardsCounts: Observable<[Int]> = Observable([])
-    var deckWasChosen: ((Deck) -> Void)?
     
     init?(manager: DeckManager, notificationCenter: NotificationCenter = .default) {
         guard let decks = try? manager.getDecksToLearn() else { return nil }
         self.decks = decks
         self.notificationCenter = notificationCenter
-        decksTitles.value = decks.compactMap { $0.name }
-        decksCardsCounts.value = decks.compactMap { try? manager.getCardsToLearn(from: $0).count }
+        self.manager = manager
+        decksDidChange()
     }
     
-    func chooseDeck(at index: Int) {
-        guard decks.count > index else { return }
-        deckWasChosen?(decks[index])
+    func refresh() {
+        if let decks = try? manager.getDecksToLearn() {
+            self.decks = decks
+        }
+    }
+    
+    private func decksDidChange() {
+        decksTitles.value = decks.compactMap { $0.name }
+        decksCardsCounts.value = decks.compactMap { try? manager.getCardsToLearn(from: $0).count }
     }
 }

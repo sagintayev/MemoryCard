@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: Coordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let manager = PersistenceManager()
         let navigationController = UINavigationController()
-        let coordinator = Coordinator(navigationController: navigationController, manager: manager)
-        coordinator.start()
+        coordinator = Coordinator(navigationController: navigationController, manager: manager)
+        coordinator?.start()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
@@ -52,7 +53,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 

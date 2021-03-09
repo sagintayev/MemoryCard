@@ -14,8 +14,8 @@ class Coordinator {
     
     private lazy var homeViewController: HomeViewController = {
         let learningDecksViewModel = LearningDecksViewModel(manager: manager, notificationCenter: notificationCenter)
-        learningDecksViewModel?.deckWasChosen = learnDeck
         let homeViewController = HomeViewController(learningDecksViewModel: learningDecksViewModel)
+        homeViewController.coordinator = self
         return homeViewController
     }()
     
@@ -37,7 +37,8 @@ class Coordinator {
         
     }
     
-    private func learnDeck(_ deck: Deck) {
+    func learnDeck(withName name: String) {
+        guard let deck = try? manager.getDeck(byName: name) else { return }
         guard let learningCardViewModel = LearningCardViewModel(deck: deck, manager: manager, notificationCenter: notificationCenter) else { return }
         let learningCardViewController = LearningCardViewController(viewModel: learningCardViewModel)
         learningCardViewController.coordinator = self
