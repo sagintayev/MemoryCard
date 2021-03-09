@@ -87,6 +87,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC12688B25F248C600DE1294 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F7C18A0E25C023C000317C69 /* DecksTableViewCell.swift */,
+				F7C18A1325C026E200317C69 /* DeckCollectionViewCell.swift */,
+				F78048E925C4279F00A2EDEC /* CardTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AC12688C25F248E700DE1294 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ACFDAF0025D699220029DF28 /* CardManagerViewController.swift */,
+				AC94B46625E3742800EB497C /* LearningCardViewController.swift */,
+				F703CBD425C3FD8D001BDC4A /* CardsViewController.swift */,
+				F706189525BFFF6700E871C5 /* HomeViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		F703CBD725C3FEA4001BDC4A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,14 +121,9 @@
 		F706189825C0001400E871C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F706189525BFFF6700E871C5 /* HomeViewController.swift */,
-				F7C18A0E25C023C000317C69 /* DecksTableViewCell.swift */,
-				F7C18A1325C026E200317C69 /* DeckCollectionViewCell.swift */,
-				F703CBD425C3FD8D001BDC4A /* CardsViewController.swift */,
-				F78048E925C4279F00A2EDEC /* CardTableViewCell.swift */,
+				AC12688C25F248E700DE1294 /* View Controllers */,
+				AC12688B25F248C600DE1294 /* Cells */,
 				F789766425CA91A9009DC5B9 /* CardView.swift */,
-				ACFDAF0025D699220029DF28 /* CardManagerViewController.swift */,
-				AC94B46625E3742800EB497C /* LearningCardViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
