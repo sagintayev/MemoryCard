@@ -10,7 +10,7 @@ import UIKit
 final class HomeViewController: UIViewController {
     weak var coordinator: Coordinator?
     
-    private let learningDecksViewModel: LearningDecksViewModel?
+    private let learningDecksViewModel: DecksViewModel?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
-    init(learningDecksViewModel: LearningDecksViewModel?) {
+    init(learningDecksViewModel: DecksViewModel?) {
         self.learningDecksViewModel = learningDecksViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,10 +32,10 @@ final class HomeViewController: UIViewController {
         setupNavItem()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         learningDecksViewModel?.refresh()
-        tableView.reloadData()
+        tableView.reloadSections([0], with: .none)
     }
     
     private func setupSubviews() {
@@ -53,7 +53,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.register(DecksTableViewCell.self, forCellReuseIdentifier: DecksTableViewCell.identifier)
+        tableView.register(LearningDecksTableViewCell.self, forCellReuseIdentifier: LearningDecksTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -64,7 +64,7 @@ final class HomeViewController: UIViewController {
     
     @objc
     private func searcBarButtonTapped() {
-
+        coordinator?.browseAllDecks()
     }
     
     required init?(coder: NSCoder) {
@@ -77,23 +77,24 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return ((learningDecksViewModel?.decksTitles.value.count ?? 0) > 0) ? 1 : 0
+            return ((learningDecksViewModel?.decksNames.value.count ?? 0) > 0) ? 1 : 0
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DecksTableViewCell.identifier, for: indexPath)
-        if let cell = cell as? DecksTableViewCell {
-            learningDecksViewModel?.decksTitles.observe { titles in
+        let cell = tableView.dequeueReusableCell(withIdentifier: LearningDecksTableViewCell.identifier, for: indexPath)
+        if let cell = cell as? LearningDecksTableViewCell {
+            learningDecksViewModel?.decksNames.observe { titles in
                 cell.deckNames = titles
             }
             learningDecksViewModel?.decksCardsCounts.observe { counts in
-                cell.deckCardsToLearnCount = counts
+                cell.learningCardsCount = counts
             }
-            cell.didTapOnDeck = { [weak self] (deckName) in
-                self?.coordinator?.learnDeck(withName: deckName)
+            cell.didTapOnCell = { [ weak coordinator ] cell in
+                guard let deckName = cell.title else { return }
+                coordinator?.learnDeck(withName: deckName)
             }
         }
         return cell

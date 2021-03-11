@@ -13,7 +13,7 @@ class Coordinator {
     private let notificationCenter: NotificationCenter
     
     private lazy var homeViewController: HomeViewController = {
-        let learningDecksViewModel = LearningDecksViewModel(manager: manager, notificationCenter: notificationCenter)
+        let learningDecksViewModel = DecksViewModel(manager: manager, decksType: .learning)
         let homeViewController = HomeViewController(learningDecksViewModel: learningDecksViewModel)
         homeViewController.coordinator = self
         return homeViewController
@@ -34,7 +34,9 @@ class Coordinator {
     }
     
     func browseAllDecks() {
-        
+        guard let decksViewModel = DecksViewModel(manager: manager, decksType: .all) else { return }
+        let decksViewController = DecksViewController(decksViewModel: decksViewModel)
+        navigationController.pushViewController(decksViewController, animated: true)
     }
     
     func learnDeck(withName name: String) {

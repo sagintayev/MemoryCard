@@ -22,6 +22,12 @@ class DeckCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var countColor: UIColor = .red {
+        didSet {
+            countLabel.backgroundColor = countColor
+        }
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -45,7 +51,6 @@ class DeckCollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title1)
         label.layer.masksToBounds = true
-        label.backgroundColor = UIColor.red
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
