@@ -8,8 +8,17 @@
 import UIKit
 
 class Coordinator {
+    private let tabBarController: UITabBarController
+    private lazy var navigationController: UINavigationController = {
+       let navigationController = UINavigationController(rootViewController: homeViewController)
+        navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
+        if let tabBarController = tabBarController as? UINavigationControllerDelegate {
+            navigationController.delegate = tabBarController
+        }
+        return navigationController
+    }()
+    
     private let manager: CardManager&DeckManager
-    private let navigationController: UINavigationController
     private let notificationCenter: NotificationCenter
     
     private lazy var homeViewController: HomeViewController = {
@@ -19,14 +28,16 @@ class Coordinator {
         return homeViewController
     }()
     
-    init(navigationController: UINavigationController, manager: CardManager&DeckManager, notificationCenter: NotificationCenter = .default) {
+    init(tabBarController: UITabBarController, manager: CardManager&DeckManager, notificationCenter: NotificationCenter = .default) {
+        self.tabBarController = tabBarController
         self.manager = manager
-        self.navigationController = navigationController
         self.notificationCenter = notificationCenter
     }
     
     func start() {
-        navigationController.pushViewController(homeViewController, animated: false)
+        let placeholderViewController1 = UIViewController()
+        let placeholderViewController2 = UIViewController()
+        tabBarController.viewControllers = [navigationController, placeholderViewController1, placeholderViewController2]
     }
     
     func backHome() {
@@ -44,6 +55,7 @@ class Coordinator {
         guard let learningCardViewModel = LearningCardViewModel(deck: deck, manager: manager, notificationCenter: notificationCenter) else { return }
         let learningCardViewController = LearningCardViewController(viewModel: learningCardViewModel)
         learningCardViewController.coordinator = self
+        learningCardViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(learningCardViewController, animated: true)
     }
 }

@@ -15,15 +15,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let manager = PersistenceManager()
-        let navigationController = UINavigationController()
-        coordinator = Coordinator(navigationController: navigationController, manager: manager)
-        coordinator?.start()
+    
+        let curvedTabBarViewController = UIStoryboard(name: "CurvedTabBarViewController", bundle: nil).instantiateViewController(identifier: CurvedTabBarViewController.storyBoardIdentifier) as! CurvedTabBarViewController
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = curvedTabBarViewController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
+        
+        let manager = PersistenceManager()
+        coordinator = Coordinator(tabBarController: curvedTabBarViewController, manager: manager, notificationCenter: .default)
+        coordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

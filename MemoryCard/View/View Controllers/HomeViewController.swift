@@ -14,7 +14,7 @@ final class HomeViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .blue
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.contentInset.top = 50
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +28,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGray5
         setupSubviews()
         setupNavItem()
     }

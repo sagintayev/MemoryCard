@@ -11,6 +11,9 @@
 		AC0E06A625E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */; };
 		AC212E8025EBBA56002869AC /* DecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC212E7F25EBBA56002869AC /* DecksViewModel.swift */; };
 		AC29C89E25EE54C8007262F7 /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */; };
+		AC4AC43125FBCB03004B2454 /* CurvedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */; };
+		AC4AC43F25FC810E004B2454 /* CurvedTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC43D25FC810E004B2454 /* CurvedTabBarViewController.swift */; };
+		AC4AC44325FC9409004B2454 /* CurvedTabBarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC4AC44225FC9409004B2454 /* CurvedTabBarViewController.storyboard */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
 		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
 		AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */; };
@@ -47,6 +50,9 @@
 		AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+withPriority().swift"; sourceTree = "<group>"; };
 		AC212E7F25EBBA56002869AC /* DecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewModel.swift; sourceTree = "<group>"; };
 		AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
+		AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTabBar.swift; sourceTree = "<group>"; };
+		AC4AC43D25FC810E004B2454 /* CurvedTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTabBarViewController.swift; sourceTree = "<group>"; };
+		AC4AC44225FC9409004B2454 /* CurvedTabBarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurvedTabBarViewController.storyboard; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
 		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -109,6 +115,8 @@
 				F703CBD425C3FD8D001BDC4A /* CardsViewController.swift */,
 				F706189525BFFF6700E871C5 /* HomeViewController.swift */,
 				ACA08E5125F9258600A99FCF /* DecksViewController.swift */,
+				AC4AC44225FC9409004B2454 /* CurvedTabBarViewController.storyboard */,
+				AC4AC43D25FC810E004B2454 /* CurvedTabBarViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -130,6 +138,7 @@
 				AC12688B25F248C600DE1294 /* Cells */,
 				F789766425CA91A9009DC5B9 /* CardView.swift */,
 				ACA08E4E25F920DF00A99FCF /* DecksCollectionView.swift */,
+				AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4AC44325FC9409004B2454 /* CurvedTabBarViewController.storyboard in Resources */,
 				F7DDFF8E25BAAA9700BF9D75 /* LaunchScreen.storyboard in Resources */,
 				F7DDFF8B25BAAA9700BF9D75 /* Assets.xcassets in Resources */,
 			);
@@ -275,6 +285,7 @@
 			files = (
 				AC9888FD25D170280042AA8E /* Protocols.swift in Sources */,
 				AC0E06A625E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift in Sources */,
+				AC4AC43125FBCB03004B2454 /* CurvedTabBar.swift in Sources */,
 				F703CBD525C3FD8D001BDC4A /* CardsViewController.swift in Sources */,
 				F78048EA25C4279F00A2EDEC /* CardTableViewCell.swift in Sources */,
 				F7E3DAC725BC0ECF0077A732 /* PersistenceManager.swift in Sources */,
@@ -293,6 +304,7 @@
 				AC94B46725E3742800EB497C /* LearningCardViewController.swift in Sources */,
 				F7C18A1425C026E200317C69 /* DeckCollectionViewCell.swift in Sources */,
 				AC212E8025EBBA56002869AC /* DecksViewModel.swift in Sources */,
+				AC4AC43F25FC810E004B2454 /* CurvedTabBarViewController.swift in Sources */,
 				AC9B4C1525E9035700047297 /* AnswerComplexity.swift in Sources */,
 				AC792A8625E17614006CCAA6 /* Action.swift in Sources */,
 				F789766925CAA3EB009DC5B9 /* CardViewModel.swift in Sources */,

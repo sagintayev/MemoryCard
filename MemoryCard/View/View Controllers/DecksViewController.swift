@@ -13,7 +13,7 @@ class DecksViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = .systemGray5
         setupCollectionView()
         setObservers()
     }
@@ -29,7 +29,7 @@ class DecksViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        decksCollectionView.embed(in: view)
+        decksCollectionView.embed(in: view, useSafeArea: false)
         decksCollectionView.contentInset.top = 50
         decksCollectionView.cardCountColor = .lightGray
     }
