@@ -8,7 +8,7 @@
 import UIKit
 
 class Coordinator {
-    private let tabBarController: UITabBarController
+    private var tabBarController: UITabBarController&Coordinatable
     private lazy var navigationController: UINavigationController = {
        let navigationController = UINavigationController(rootViewController: homeViewController)
         navigationController.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
@@ -28,7 +28,7 @@ class Coordinator {
         return homeViewController
     }()
     
-    init(tabBarController: UITabBarController, manager: CardManager&DeckManager, notificationCenter: NotificationCenter = .default) {
+    init(tabBarController: UITabBarController&Coordinatable, manager: CardManager&DeckManager, notificationCenter: NotificationCenter = .default) {
         self.tabBarController = tabBarController
         self.manager = manager
         self.notificationCenter = notificationCenter
@@ -38,6 +38,7 @@ class Coordinator {
         let placeholderViewController1 = UIViewController()
         let placeholderViewController2 = UIViewController()
         tabBarController.viewControllers = [navigationController, placeholderViewController1, placeholderViewController2]
+        tabBarController.coordinator = self
     }
     
     func backHome() {
@@ -57,5 +58,12 @@ class Coordinator {
         learningCardViewController.coordinator = self
         learningCardViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(learningCardViewController, animated: true)
+    }
+    
+    func createCard() {
+        let cardManagerViewModel = CardManagerViewModel(model: nil, manager: manager, notificationCenter: notificationCenter)
+        let cardManagerViewController = CardManagerViewController(cardManagerViewModel: cardManagerViewModel)
+        cardManagerViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(cardManagerViewController, animated: true)
     }
 }

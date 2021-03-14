@@ -22,3 +22,7 @@ protocol DeckManager {
     func getDecksToLearn() throws -> [Deck]
     func getCardsToLearn(from deck: Deck) throws -> [Card]
 }
+
+protocol Coordinatable {
+    var coordinator: Coordinator? { get set }
+}

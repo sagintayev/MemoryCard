@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */; };
 		AC0E06A625E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */; };
+		AC1AECBE25FDE45500F7C2DB /* UIView+setAxisAnchors().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1AECBD25FDE45500F7C2DB /* UIView+setAxisAnchors().swift */; };
 		AC212E8025EBBA56002869AC /* DecksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC212E7F25EBBA56002869AC /* DecksViewModel.swift */; };
 		AC29C89E25EE54C8007262F7 /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */; };
 		AC4AC43125FBCB03004B2454 /* CurvedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+CustomNames.swift"; sourceTree = "<group>"; };
 		AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+withPriority().swift"; sourceTree = "<group>"; };
+		AC1AECBD25FDE45500F7C2DB /* UIView+setAxisAnchors().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+setAxisAnchors().swift"; sourceTree = "<group>"; };
 		AC212E7F25EBBA56002869AC /* DecksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewModel.swift; sourceTree = "<group>"; };
 		AC29C89D25EE54C8007262F7 /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
 		AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTabBar.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				F703CBD825C3FECD001BDC4A /* UIView+embed().swift */,
+				AC1AECBD25FDE45500F7C2DB /* UIView+setAxisAnchors().swift */,
 				AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */,
 				AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */,
 			);
@@ -294,6 +297,7 @@
 				F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */,
 				F71F799225BB07AF009416EE /* Model.xcdatamodeld in Sources */,
 				ACD20D4525EF85A7001B3B07 /* Deck+CoreDataProperties.swift in Sources */,
+				AC1AECBE25FDE45500F7C2DB /* UIView+setAxisAnchors().swift in Sources */,
 				AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */,
 				ACD20D4425EF85A7001B3B07 /* Deck+CoreDataClass.swift in Sources */,
 				AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */,
