@@ -149,7 +149,7 @@ class CurvedTabBarViewController: UITabBarController, Coordinatable {
     
     @objc
     private func rightAdditionalButtonTapped() {
-        
+        coordinator?.createDeck()
     }
 }
 

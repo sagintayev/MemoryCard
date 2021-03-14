@@ -66,4 +66,20 @@ class Coordinator {
         cardManagerViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(cardManagerViewController, animated: true)
     }
+    
+    func createDeck() {
+        let deckCreationAlertController = UIAlertController(title: "Enter Deck Name", message: nil, preferredStyle: .alert)
+        deckCreationAlertController.addTextField { (textField) in
+            textField.placeholder = "Deck Name"
+        }
+        deckCreationAlertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { [weak self] (_) in
+            guard let deckNameTextField = deckCreationAlertController.textFields?.first else { return }
+            guard let deckName = deckNameTextField.text else { return }
+            self?.manager.saveDeck(named: deckName)
+            deckCreationAlertController.dismiss(animated: true)
+        }))
+        deckCreationAlertController.addAction(UIAlertAction(title: "Cancel", style: .destructive))
+        
+        navigationController.present(deckCreationAlertController, animated: true)
+    }
 }
