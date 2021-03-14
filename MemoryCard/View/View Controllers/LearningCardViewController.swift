@@ -64,7 +64,7 @@ class LearningCardViewController: UIViewController {
     
     private let answerButton1: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .green
+        button.backgroundColor = .systemRed
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
@@ -76,7 +76,7 @@ class LearningCardViewController: UIViewController {
     
     private let answerButton2: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .systemGreen
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
@@ -88,7 +88,7 @@ class LearningCardViewController: UIViewController {
     
     private let answerButton3: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .systemGreen
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
@@ -100,7 +100,7 @@ class LearningCardViewController: UIViewController {
     
     private let answerButton4: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .systemGreen
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.lineBreakMode = .byWordWrapping
         button.titleLabel?.textAlignment = .center
