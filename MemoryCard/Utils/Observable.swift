@@ -12,6 +12,10 @@ final class Observable<T> {
         didSet { valueDidChange?(value) }
     }
     
+    var isObserved: Bool {
+        valueDidChange != nil
+    }
+    
     private var valueDidChange: ((T) -> Void)?
     
     init(_ value: T) {
