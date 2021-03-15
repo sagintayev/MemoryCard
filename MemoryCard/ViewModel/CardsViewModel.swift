@@ -8,18 +8,21 @@
 import Foundation
 
 class CardsViewModel {
-    private let manager: DeckManager&CardManager
+    private let deckManager: DeckPersistenceManager
+    private let cardManager: CardPersistenceManager
     private let notificationCenter: NotificationCenter
+    
     private var deck: Deck? {
         didSet { modelDidChange() }
     }
     
     var cardViewModels: [CardViewModel]?
     
-    init(manager: DeckManager&CardManager, deckName name: String, notificationCenter: NotificationCenter = .default) {
-        self.manager = manager
+    init(deckManager: DeckPersistenceManager, cardManager: CardPersistenceManager, deckName name: String, notificationCenter: NotificationCenter) {
+        self.deckManager = deckManager
+        self.cardManager = cardManager
         self.notificationCenter = notificationCenter
-        deck = try? manager.getDeck(byName: name)
+        deck = try? deckManager.getDeck(byName: name)
         modelDidChange()
     }
     
@@ -29,6 +32,6 @@ class CardsViewModel {
     
     private func modelDidChange() {
         guard let deck = deck else { return }
-        cardViewModels = deck.cards.map { CardViewModel(manager: manager, model: $0, notificationCenter: notificationCenter) }
+        cardViewModels = deck.cards.map { CardViewModel(cardManager: cardManager, model: $0, notificationCenter: notificationCenter) }
     }
 }

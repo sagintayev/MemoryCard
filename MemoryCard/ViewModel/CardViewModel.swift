@@ -9,18 +9,23 @@ import Foundation
 
 final class CardViewModel {
     private var model: Card?
-    private var manager: CardManager
+    private var cardManager: CardPersistenceManager
     private let notificationCenter: NotificationCenter
+    
     var question = Observable("")
     var answer = Observable("")
     var deck = Observable("")
     var testDate = Observable("")
     
-    init(manager: CardManager, model: Card? = nil, notificationCenter: NotificationCenter = .default) {
-        self.manager = manager
+    init(cardManager: CardPersistenceManager, model: Card?, notificationCenter: NotificationCenter) {
+        self.cardManager = cardManager
         self.notificationCenter = notificationCenter
         setModel(model)
         setObservers()
+    }
+    
+    deinit {
+        notificationCenter.removeObserver(self)
     }
     
     func setModel(_ model: Card? = nil) {
@@ -67,9 +72,5 @@ final class CardViewModel {
         default:
             break
         }
-    }
-    
-    deinit {
-        notificationCenter.removeObserver(self)
     }
 }

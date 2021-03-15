@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC02636B25FFCEA400B99FED /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02636A25FFCEA400B99FED /* CoreDataStack.swift */; };
+		AC02636E25FFD10B00B99FED /* CardPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02636D25FFD10B00B99FED /* CardPersistenceManager.swift */; };
+		AC02637225FFDE9000B99FED /* DeckPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02637125FFDE9000B99FED /* DeckPersistenceManager.swift */; };
 		AC0B57C125E15FB000B03231 /* NSNotification.Name+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */; };
 		AC0E06A625E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */; };
 		AC1AECBE25FDE45500F7C2DB /* UIView+setAxisAnchors().swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1AECBD25FDE45500F7C2DB /* UIView+setAxisAnchors().swift */; };
@@ -43,10 +46,12 @@
 		F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DDFF8325BAAA9200BF9D75 /* SceneDelegate.swift */; };
 		F7DDFF8B25BAAA9700BF9D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7DDFF8A25BAAA9700BF9D75 /* Assets.xcassets */; };
 		F7DDFF8E25BAAA9700BF9D75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7DDFF8C25BAAA9700BF9D75 /* LaunchScreen.storyboard */; };
-		F7E3DAC725BC0ECF0077A732 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E3DAC625BC0ECF0077A732 /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC02636A25FFCEA400B99FED /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		AC02636D25FFD10B00B99FED /* CardPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersistenceManager.swift; sourceTree = "<group>"; };
+		AC02637125FFDE9000B99FED /* DeckPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckPersistenceManager.swift; sourceTree = "<group>"; };
 		AC0B57C025E15FB000B03231 /* NSNotification.Name+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+CustomNames.swift"; sourceTree = "<group>"; };
 		AC0E06A525E3BF7F00C9DA2E /* NSLayoutConstraint+withPriority().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+withPriority().swift"; sourceTree = "<group>"; };
 		AC1AECBD25FDE45500F7C2DB /* UIView+setAxisAnchors().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+setAxisAnchors().swift"; sourceTree = "<group>"; };
@@ -85,7 +90,6 @@
 		F7DDFF8A25BAAA9700BF9D75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7DDFF8D25BAAA9700BF9D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F7DDFF8F25BAAA9700BF9D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7E3DAC625BC0ECF0077A732 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 				F71F799025BB07AF009416EE /* Model.xcdatamodeld */,
 				AC792A8525E17614006CCAA6 /* Action.swift */,
 				AC9B4C1425E9035700047297 /* AnswerComplexity.swift */,
+				AC02636D25FFD10B00B99FED /* CardPersistenceManager.swift */,
+				AC02637125FFDE9000B99FED /* DeckPersistenceManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,10 +214,10 @@
 			isa = PBXGroup;
 			children = (
 				F703CBD725C3FEA4001BDC4A /* Extensions */,
-				F7E3DAC625BC0ECF0077A732 /* PersistenceManager.swift */,
 				F789766D25CAC06B009DC5B9 /* Observable.swift */,
 				AC9888FC25D170280042AA8E /* Protocols.swift */,
 				AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */,
+				AC02636A25FFCEA400B99FED /* CoreDataStack.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -291,7 +297,7 @@
 				AC4AC43125FBCB03004B2454 /* CurvedTabBar.swift in Sources */,
 				F703CBD525C3FD8D001BDC4A /* CardsViewController.swift in Sources */,
 				F78048EA25C4279F00A2EDEC /* CardTableViewCell.swift in Sources */,
-				F7E3DAC725BC0ECF0077A732 /* PersistenceManager.swift in Sources */,
+				AC02636E25FFD10B00B99FED /* CardPersistenceManager.swift in Sources */,
 				F7DDFF8225BAAA9200BF9D75 /* AppDelegate.swift in Sources */,
 				ACD20D4325EF85A6001B3B07 /* Card+CoreDataProperties.swift in Sources */,
 				F7DDFF8425BAAA9200BF9D75 /* SceneDelegate.swift in Sources */,
@@ -319,6 +325,8 @@
 				AC8C98E625E5095000CE1B65 /* LearningCardViewModel.swift in Sources */,
 				F7C18A0F25C023C000317C69 /* LearningDecksTableViewCell.swift in Sources */,
 				AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */,
+				AC02636B25FFCEA400B99FED /* CoreDataStack.swift in Sources */,
+				AC02637225FFDE9000B99FED /* DeckPersistenceManager.swift in Sources */,
 				F789766525CA91A9009DC5B9 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

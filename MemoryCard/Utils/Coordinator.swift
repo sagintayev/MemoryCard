@@ -8,6 +8,10 @@
 import UIKit
 
 class Coordinator {
+    private let cardManager: CardPersistenceManager
+    private let deckManager: DeckPersistenceManager
+    private let notificationCenter: NotificationCenter
+    
     private var tabBarController: UITabBarController&Coordinatable
     private lazy var navigationController: UINavigationController = {
        let navigationController = UINavigationController(rootViewController: homeViewController)
@@ -18,19 +22,17 @@ class Coordinator {
         return navigationController
     }()
     
-    private let manager: CardManager&DeckManager
-    private let notificationCenter: NotificationCenter
-    
     private lazy var homeViewController: HomeViewController = {
-        let learningDecksViewModel = DecksViewModel(manager: manager, decksType: .learning)
+        let learningDecksViewModel = DecksViewModel(manager: deckManager, decksType: .learning)
         let homeViewController = HomeViewController(learningDecksViewModel: learningDecksViewModel)
         homeViewController.coordinator = self
         return homeViewController
     }()
     
-    init(tabBarController: UITabBarController&Coordinatable, manager: CardManager&DeckManager, notificationCenter: NotificationCenter = .default) {
+    init(tabBarController: UITabBarController&Coordinatable, cardManager: CardPersistenceManager, deckManager: DeckPersistenceManager, notificationCenter: NotificationCenter = .default) {
         self.tabBarController = tabBarController
-        self.manager = manager
+        self.cardManager = cardManager
+        self.deckManager = deckManager
         self.notificationCenter = notificationCenter
     }
     
@@ -46,14 +48,14 @@ class Coordinator {
     }
     
     func browseAllDecks() {
-        guard let decksViewModel = DecksViewModel(manager: manager, decksType: .all) else { return }
+        guard let decksViewModel = DecksViewModel(manager: deckManager, decksType: .all) else { return }
         let decksViewController = DecksViewController(decksViewModel: decksViewModel)
         navigationController.pushViewController(decksViewController, animated: true)
     }
     
     func learnDeck(withName name: String) {
-        guard let deck = try? manager.getDeck(byName: name) else { return }
-        guard let learningCardViewModel = LearningCardViewModel(deck: deck, manager: manager, notificationCenter: notificationCenter) else { return }
+        guard let deck = try? deckManager.getDeck(byName: name) else { return }
+        guard let learningCardViewModel = LearningCardViewModel(deck: deck, deckManager: deckManager, cardManager: cardManager, notificationCenter: notificationCenter) else { return }
         let learningCardViewController = LearningCardViewController(viewModel: learningCardViewModel)
         learningCardViewController.coordinator = self
         learningCardViewController.hidesBottomBarWhenPushed = true
@@ -61,7 +63,7 @@ class Coordinator {
     }
     
     func createCard() {
-        let cardManagerViewModel = CardManagerViewModel(model: nil, manager: manager, notificationCenter: notificationCenter)
+        let cardManagerViewModel = CardManagerViewModel(model: nil, deckManager: deckManager, cardManager: cardManager, notificationCenter: notificationCenter)
         let cardManagerViewController = CardManagerViewController(cardManagerViewModel: cardManagerViewModel)
         cardManagerViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(cardManagerViewController, animated: true)
@@ -75,7 +77,7 @@ class Coordinator {
         deckCreationAlertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { [weak self] (_) in
             guard let deckNameTextField = deckCreationAlertController.textFields?.first else { return }
             guard let deckName = deckNameTextField.text else { return }
-            self?.manager.saveDeck(named: deckName)
+            try? self?.deckManager.saveDeck(named: deckName)
             deckCreationAlertController.dismiss(animated: true)
         }))
         deckCreationAlertController.addAction(UIAlertAction(title: "Cancel", style: .destructive))

@@ -22,8 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
         
-        let manager = PersistenceManager()
-        coordinator = Coordinator(tabBarController: curvedTabBarViewController, manager: manager, notificationCenter: .default)
+        let notificationCenter: NotificationCenter = .default
+        let coreDataStack = CoreDataStack()
+        let deckPersistenceManager = DeckPersistenceManager(coreDataStack: coreDataStack, notificationCenter: notificationCenter)
+        let cardPersistenceManager = CardPersistenceManager(coreDataStack: coreDataStack, notificationCenter: notificationCenter)
+        coordinator = Coordinator(tabBarController: curvedTabBarViewController, cardManager: cardPersistenceManager, deckManager: deckPersistenceManager, notificationCenter: notificationCenter)
         coordinator?.start()
     }
 

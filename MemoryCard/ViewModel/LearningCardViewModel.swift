@@ -8,10 +8,9 @@
 import Foundation
 
 class LearningCardViewModel {
-    private let manager: DeckManager&CardManager
+    private let deckManager: DeckPersistenceManager
+    private let cardManager: CardPersistenceManager
     private let cardViewModel: CardViewModel
-    private let deck: Deck
-    private let notificationCenter: NotificationCenter
     
     private let fullButtonsChoice: [AnswerComplexity] = [.impossible, .hard, .good, .easy]
     private let binaryButtonsChoice: [AnswerComplexity] = [.impossible, .good]
@@ -34,22 +33,21 @@ class LearningCardViewModel {
         cardViewModel.answer
     }
     
-    init?(deck: Deck, manager: DeckManager&CardManager, notificationCenter: NotificationCenter = .default) {
-        guard let cardsToLearn = try? manager.getCardsToLearn(from: deck) else {
+    init?(deck: Deck, deckManager: DeckPersistenceManager, cardManager: CardPersistenceManager, notificationCenter: NotificationCenter) {
+        guard let cardsToLearn = try? deckManager.getCardsToLearn(from: deck) else {
             return nil
         }
         guard cardsToLearn.count > 0 else { return nil }
-        self.notificationCenter = notificationCenter
-        self.manager = manager
-        self.deck = deck
-        self.cardViewModel = CardViewModel(manager: manager, model: nil, notificationCenter: notificationCenter)
+        self.deckManager = deckManager
+        self.cardManager = cardManager
+        self.cardViewModel = CardViewModel(cardManager: cardManager, model: nil, notificationCenter: notificationCenter)
         self.cardsToLearn = cardsToLearn
         currentCardDidChange()
     }
     
     func answerCard(buttonIndex: Int) {
         let complexity: AnswerComplexity = cardsToLearn[currentIndex].correctAnswersChain > 0 ? fullButtonsChoice[buttonIndex] : binaryButtonsChoice[buttonIndex]
-        manager.answerCard(cardsToLearn[currentIndex], withComplexity: complexity)
+        try? cardManager.answerCard(cardsToLearn[currentIndex], withComplexity: complexity)
         let againButtonTapped = (buttonIndex == 0)
         nextCard(postponeCurrentCard: againButtonTapped)
     }

@@ -13,7 +13,7 @@ enum DecksType {
 }
 
 class DecksViewModel {
-    private let manager: DeckManager
+    private let manager: DeckPersistenceManager
     private let getDecks: () -> [Deck]?
     
     private var decks: [Deck] {
@@ -23,7 +23,7 @@ class DecksViewModel {
     var decksNames = Observable([""])
     var decksCardsCounts: Observable<[Int]> = Observable([])
     
-    init?(manager: DeckManager, decksType: DecksType) {
+    init?(manager: DeckPersistenceManager, decksType: DecksType) {
         getDecks = { () -> [Deck]? in
             switch decksType {
             case .all:
