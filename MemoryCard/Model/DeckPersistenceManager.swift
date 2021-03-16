@@ -15,26 +15,11 @@ class DeckPersistenceManager {
     init(coreDataStack: CoreDataStack, notificationCenter: NotificationCenter) {
         self.coreDataStack = coreDataStack
         self.notificationCenter = notificationCenter
-        setupObservers()
     }
     
-    deinit {
-        notificationCenter.removeObserver(self)
-    }
-    
-    private func setupObservers() {
-        notificationCenter.addObserver(self, selector: #selector(contextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
-    }
-    
-    @objc
-    private func contextDidSave(_ notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        for (userInfoKey, action) in [("inserted", Action.create), ("updated", Action.update), ("deleted", Action.delete)]{
-            (userInfo[userInfoKey] as? Set<Deck>)?.forEach {
-                notificationCenter.post(name: .DeckDidChange, object: self, userInfo: ["deck": $0, "action": action])
-            }
-        }
+    private func postNotification(with deck: Deck, and action: Action) {
+        let userInfo: [AnyHashable: Any] = ["deck": deck, "action": action]
+        notificationCenter.post(name: .CardDidChange, object: deck, userInfo: userInfo)
     }
 }
 
@@ -44,16 +29,19 @@ extension DeckPersistenceManager {
         let deck = Deck(context: coreDataStack.viewContext)
         deck.name = name
         try coreDataStack.viewContext.save()
+        postNotification(with: deck, and: .create)
         return deck
     }
     
     func updateDeck(_ deck: Deck, name: String) throws {
         deck.name = name
         try coreDataStack.viewContext.save()
+        postNotification(with: deck, and: .update)
     }
     
     func deleteDeck(_ deck: Deck) {
         coreDataStack.viewContext.delete(deck)
+        postNotification(with: deck, and: .delete)
     }
     
     func getAllDecks() throws -> [Deck] {

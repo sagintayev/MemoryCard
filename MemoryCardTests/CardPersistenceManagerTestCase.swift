@@ -9,123 +9,113 @@ import XCTest
 @testable import MemoryCard
 
 class CardPersistenceManagerTestCase: XCTestCase {
-    
-    private var cardManager: CardPersistenceManager!
-    private var coreDataStack: CoreDataStack!
+    private var sut: CardPersistenceManager!
     private var notificationCenter: TestNotificationCenter!
+    private var testDeck: Deck!
 
     override func setUpWithError() throws {
         notificationCenter = TestNotificationCenter()
-        coreDataStack = TestCoreDataStack()
-        cardManager = CardPersistenceManager(coreDataStack: coreDataStack, notificationCenter: notificationCenter)
-    }
-
-    override func tearDownWithError() throws {
-        cardManager = nil
+        let coreDataStack = TestCoreDataStack()
+        sut = CardPersistenceManager(coreDataStack: coreDataStack, notificationCenter: notificationCenter)
+        let deckManager = DeckPersistenceManager(coreDataStack: coreDataStack, notificationCenter: notificationCenter)
+        testDeck = try deckManager.saveDeck(named: "")
     }
     
-    func testSaveCard() {
+    func testSaveCard() throws {
         let testQuestion = "testQ"
         let testAnswer = "testA"
-        let testDeck = createTestDeck()
         
-        let card = try? cardManager.saveCard(question: testQuestion, answer: testAnswer, in: testDeck)
+        let card = try sut.saveCard(question: testQuestion, answer: testAnswer, in: testDeck)
         
-        XCTAssertEqual(card?.question, testQuestion)
-        XCTAssertEqual(card?.answer, testAnswer)
-        XCTAssertEqual(card?.deck, testDeck)
+        XCTAssertEqual(card.question, testQuestion)
+        XCTAssertEqual(card.answer, testAnswer)
+        XCTAssertEqual(card.deck, testDeck)
     }
     
-    func testSaveCardSavesOnlyOne() {
-        let testDeck = createTestDeck()
+    func testSaveCardSavesOnlyOne() throws {
+        try sut.saveCard(question: "", answer: "", in: testDeck)
         
-        _ = try? cardManager.saveCard(question: "", answer: "", in: testDeck)
-        
-        let cards = try? cardManager.getAllCards()
-        XCTAssertEqual(cards?.count, 1)
+        let cards = try sut.getAllCards()
+        XCTAssertEqual(cards.count, 1)
     }
     
-    func testUpdateCard() {
-        let testCard = createTestCard()
+    func testUpdateCard() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
         let newQuestion = "newQ"
         let newAnswer = "newA"
-        let newDeck = createTestDeck()
         
-        try? cardManager.updateCard(testCard, question: newQuestion, answer: newAnswer, deck: newDeck)
+        try sut.updateCard(card, question: newQuestion, answer: newAnswer, deck: testDeck)
         
-        let cards = try? cardManager.getAllCards()
-        XCTAssertEqual(cards?.first?.question, newQuestion)
-        XCTAssertEqual(cards?.first?.answer, newAnswer)
-        XCTAssertEqual(cards?.first?.deck, newDeck)
+        XCTAssertEqual(card.question, newQuestion)
+        XCTAssertEqual(card.answer, newAnswer)
+        XCTAssertEqual(card.deck, testDeck)
     }
     
-    func testDeleteCard() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
+    func testDeleteCard() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
         
-        cardManager.deleteCard(card)
+        sut.deleteCard(card)
         
-        let cards = try? cardManager.getAllCards()
-        XCTAssertEqual(cards?.count, 0)
+        let cards = try sut.getAllCards()
+        XCTAssertEqual(cards.count, 0)
     }
     
-    func testGetAllCards() {
-        var cards = try? cardManager.getAllCards()
-        XCTAssertEqual(cards?.count, 0)
+    func testGetAllCards() throws {
+        var cards = try sut.getAllCards()
+        XCTAssertEqual(cards.count, 0)
         
         for _ in 0..<10 {
-            try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
+            try sut.saveCard(question: "", answer: "", in: testDeck)
         }
         
-        cards = try? cardManager.getAllCards()
-        XCTAssertEqual(cards?.count, 10)
+        cards = try sut.getAllCards()
+        XCTAssertEqual(cards.count, 10)
     }
     
-    func testInitialCorrectAnswersChainZero() {
-        let deck = createTestDeck()
-        let card = try? cardManager.saveCard(question: "", answer: "", in: deck)
-        
-        XCTAssertEqual(card?.correctAnswersChain, 0)
-    }
-    
-    func testInitialCardTestDayIsToday() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
-        
-        XCTAssertTrue(Calendar.current.isDateInToday(card.testDate))
-    }
-    
-    func testCreationDayIsToday() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
-        
-        XCTAssertTrue(Calendar.current.isDateInToday(card.creationDate))
-    }
-    
-    func testRightAnswerIncreasesCorrectAnswerChain() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
-        
-        try! cardManager.answerCard(card, withComplexity: .easy)
-        try! cardManager.answerCard(card, withComplexity: .good)
-        try! cardManager.answerCard(card, withComplexity: .hard)
-        XCTAssertEqual(card.correctAnswersChain, 3)
-    }
-    
-    func testWrongAnswerNullifyCorrectAnswerChain() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
-        try! cardManager.answerCard(card, withComplexity: .easy)
-        
-        try! cardManager.answerCard(card, withComplexity: .impossible)
+    func testInitialCorrectAnswersChainZero() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
         
         XCTAssertEqual(card.correctAnswersChain, 0)
     }
     
-    func testRightAnswerSetsCorrectNextTestDate() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
+    func testInitialCardTestDayIsToday() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
         
+        XCTAssertTrue(Calendar.current.isDateInToday(card.testDate))
+    }
+    
+    func testCreationDayIsToday() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
+        
+        XCTAssertTrue(Calendar.current.isDateInToday(card.creationDate))
+    }
+    
+    func testRightAnswerIncreasesCorrectAnswerChain() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
+        
+        try sut.answerCard(card, withComplexity: .easy)
+        try sut.answerCard(card, withComplexity: .good)
+        try sut.answerCard(card, withComplexity: .hard)
+        XCTAssertEqual(card.correctAnswersChain, 3)
+    }
+    
+    func testWrongAnswerNullifyCorrectAnswerChain() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
+        try sut.answerCard(card, withComplexity: .easy)
+        
+        try sut.answerCard(card, withComplexity: .impossible)
+        
+        XCTAssertEqual(card.correctAnswersChain, 0)
+    }
+    
+    func testRightAnswerSetsCorrectNextTestDate() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
         
         for answerComplexity in [AnswerComplexity.easy, .good, .hard, .impossible] {
             let initialTestDate = card.testDate
             let initialCorrectAnswerChain = card.correctAnswersChain
             
-            try! cardManager.answerCard(card, withComplexity: answerComplexity)
+            try sut.answerCard(card, withComplexity: answerComplexity)
     
             let days = answerComplexity.daysUntilNextCheck(multiplier: Int(max(initialCorrectAnswerChain, 1)))
             
@@ -133,17 +123,17 @@ class CardPersistenceManagerTestCase: XCTestCase {
         }
     }
     
-    func testWrongAnswerDoesNotChangeTestDate() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
+    func testWrongAnswerDoesNotChangeTestDate() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
         let initialTestDate = card.testDate
         
-        try! cardManager.answerCard(card, withComplexity: .impossible)
+        try sut.answerCard(card, withComplexity: .impossible)
         
         XCTAssertEqual(card.testDate, initialTestDate)
     }
     
-    func testSavingPostsNotification() {
-        let card = try! cardManager.saveCard(question: "a", answer: "a", in: createTestDeck())
+    func testSavingPostsNotification() throws {
+        let card = try sut.saveCard(question: "a", answer: "a", in: testDeck)
         
         XCTAssertEqual(notificationCenter.postedNotificationName, .CardDidChange)
         XCTAssertNotNil(notificationCenter.postedNotificationUserInfo)
@@ -151,10 +141,10 @@ class CardPersistenceManagerTestCase: XCTestCase {
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["action"] as! Action, .create)
     }
     
-    func testUpdatingPostsNotification() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
+    func testUpdatingPostsNotification() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
             
-        try! cardManager.updateCard(card, question: "", answer: "", deck: nil)
+        try sut.updateCard(card, question: "", answer: "", deck: nil)
         
         XCTAssertEqual(notificationCenter.postedNotificationName, .CardDidChange)
         XCTAssertNotNil(notificationCenter.postedNotificationUserInfo)
@@ -162,30 +152,16 @@ class CardPersistenceManagerTestCase: XCTestCase {
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["action"] as! Action, .update)
     }
     
-    func testDeletingPostsNotification() {
-        let card = try! cardManager.saveCard(question: "", answer: "", in: createTestDeck())
+    func testDeletingPostsNotification() throws {
+        let card = try sut.saveCard(question: "", answer: "", in: testDeck)
             
-        cardManager.deleteCard(card)
+        sut.deleteCard(card)
         
         XCTAssertEqual(notificationCenter.postedNotificationName, .CardDidChange)
         XCTAssertNotNil(notificationCenter.postedNotificationUserInfo)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["card"] as! Card, card)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["action"] as! Action, .delete)
-    }
-    
-    
-    private func createTestDeck() -> Deck {
-        let testDeck = Deck(context: coreDataStack.viewContext)
-        testDeck.name = "testDeck"
-        try? coreDataStack.viewContext.save()
-        return testDeck
-    }
-    
-    @discardableResult
-    private func createTestCard() -> Card {
-        let testCard = Card(context: coreDataStack.viewContext)
-        try? coreDataStack.viewContext.save()
-        return testCard
+
     }
 }
 
