@@ -21,6 +21,12 @@ class CardPersistenceManagerTestCase: XCTestCase {
         testDeck = try deckManager.saveDeck(named: "")
     }
     
+    override func tearDown() {
+        sut = nil
+        notificationCenter = nil
+        testDeck = nil
+    }
+    
     func testSaveCard() throws {
         let testQuestion = "testQ"
         let testAnswer = "testA"

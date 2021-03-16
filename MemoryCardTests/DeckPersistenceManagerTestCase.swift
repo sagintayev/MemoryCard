@@ -20,6 +20,12 @@ class DeckPersistenceManagerTestCase: XCTestCase {
         cardManager = CardPersistenceManager(coreDataStack: coreDataStack, notificationCenter: notificationCenter)
     }
     
+    override func tearDown() {
+        sut = nil
+        cardManager = nil
+        notificationCenter = nil
+    }
+    
     func testSaveDeck() throws {
         let deck = try sut.saveDeck(named: "Test")
         let decks = try sut.getAllDecks()
