@@ -12,17 +12,17 @@ final class CardManagerViewModel {
     private let deckManager: DeckPersistenceManager
     private let cardManager: CardPersistenceManager
     private var model: Card?
-    private var cardViewModel: CardViewModel?
+    private var cardViewModel: CardViewModel
     private let notificationCenter: NotificationCenter
     
-    var question: Observable<String>? {
-        cardViewModel?.question
+    var question: Observable<String> {
+        cardViewModel.question
     }
-    var answer: Observable<String>? {
-        cardViewModel?.answer
+    var answer: Observable<String> {
+        cardViewModel.answer
     }
-    var deck: Observable<String>? {
-        cardViewModel?.deck
+    var deck: Observable<String> {
+        cardViewModel.deck
     }
     var allDecks = Observable([""])
     var buttonText = Observable("")
@@ -38,6 +38,7 @@ final class CardManagerViewModel {
         if let decks = try? deckManager.getAllDecks() {
             allDecks = Observable(decks.compactMap { $0.name })
         }
+        setObservers()
     }
     
     deinit {
@@ -56,7 +57,8 @@ final class CardManagerViewModel {
     }
     
     func setModel(_ model: Card?) {
-        cardViewModel?.setModel(model)
+        self.model = model
+        cardViewModel.setModel(model)
         buttonText.value = model == nil ? "Create" : "Update"
     }
     

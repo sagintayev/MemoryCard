@@ -98,7 +98,7 @@ class DeckPersistenceManagerTestCase: XCTestCase {
     func testSavingPostsNotification() throws {
         let deck = try sut.saveDeck(named: "Test")
         
-        XCTAssertEqual(notificationCenter.postedNotificationName, .CardDidChange)
+        XCTAssertEqual(notificationCenter.postedNotificationName, .DeckDidChange)
         XCTAssertNotNil(notificationCenter.postedNotificationUserInfo)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["deck"] as! Deck, deck)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["action"] as! Action, .create)
@@ -109,7 +109,7 @@ class DeckPersistenceManagerTestCase: XCTestCase {
             
         try sut.updateDeck(deck, name: "newName")
         
-        XCTAssertEqual(notificationCenter.postedNotificationName, .CardDidChange)
+        XCTAssertEqual(notificationCenter.postedNotificationName, .DeckDidChange)
         XCTAssertNotNil(notificationCenter.postedNotificationUserInfo)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["deck"] as! Deck, deck)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["action"] as! Action, .update)
@@ -120,7 +120,7 @@ class DeckPersistenceManagerTestCase: XCTestCase {
             
         sut.deleteDeck(deck)
         
-        XCTAssertEqual(notificationCenter.postedNotificationName, .CardDidChange)
+        XCTAssertEqual(notificationCenter.postedNotificationName, .DeckDidChange)
         XCTAssertNotNil(notificationCenter.postedNotificationUserInfo)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["deck"] as! Deck, deck)
         XCTAssertEqual(notificationCenter.postedNotificationUserInfo?["action"] as! Action, .delete)

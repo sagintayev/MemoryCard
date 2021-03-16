@@ -117,7 +117,7 @@ class CardManagerViewController: UIViewController {
     }
     
     private func setupTextFields() {
-        deckField.text = cardManagerViewModel.deck?.value
+        deckField.text = cardManagerViewModel.deck.value
         deckField.inputView = decksPickerView
         questionField.delegate = self
         questionField.returnKeyType = .continue
@@ -145,9 +145,9 @@ class CardManagerViewController: UIViewController {
     }
     
     private func setupObservers() {
-        cardManagerViewModel.deck?.observe { [weak self] in self?.deckField.text = $0 }
-        cardManagerViewModel.answer?.observe { [weak self] in self?.answerField.text = $0 }
-        cardManagerViewModel.question?.observe { [weak self] in self?.questionField.text = $0 }
+        cardManagerViewModel.deck.observe { [weak self] in self?.deckField.text = $0 }
+        cardManagerViewModel.answer.observe { [weak self] in self?.answerField.text = $0 }
+        cardManagerViewModel.question.observe { [weak self] in self?.questionField.text = $0 }
     }
 
     required init?(coder: NSCoder) {

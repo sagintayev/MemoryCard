@@ -19,7 +19,7 @@ class DeckPersistenceManager {
     
     private func postNotification(with deck: Deck, and action: Action) {
         let userInfo: [AnyHashable: Any] = ["deck": deck, "action": action]
-        notificationCenter.post(name: .CardDidChange, object: deck, userInfo: userInfo)
+        notificationCenter.post(name: .DeckDidChange, object: self, userInfo: userInfo)
     }
 }
 
