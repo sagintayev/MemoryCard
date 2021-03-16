@@ -15,22 +15,11 @@ class CardPersistenceManager {
     init(coreDataStack: CoreDataStack, notificationCenter: NotificationCenter) {
         self.coreDataStack = coreDataStack
         self.notificationCenter = notificationCenter
-        setupObservers()
     }
     
-    deinit {
-        notificationCenter.removeObserver(self)
-    }
-    
-    @objc
-    private func contextDidSave(_ notification: NSNotification) {
-        guard let userInfo = notification.userInfo else { return }
-        
-        for (userInfoKey, action) in [("inserted", Action.create), ("updated", Action.update), ("deleted", Action.delete)]{
-            (userInfo[userInfoKey] as? Set<Card>)?.forEach {
-                notificationCenter.post(name: .CardDidChange, object: self, userInfo: ["card": $0, "action": action])
-            }
-        }
+    private func postNotification(with card: Card, and action: Action) {
+        let userInfo: [AnyHashable: Any] = ["card": card, "action": action]
+        notificationCenter.post(name: .CardDidChange, object: card, userInfo: userInfo)
     }
 }
 
@@ -44,6 +33,7 @@ extension CardPersistenceManager {
         card.testDate = Date()
         card.deck = deck
         try coreDataStack.viewContext.save()
+        postNotification(with: card, and: .create)
         return card
     }
     
@@ -58,26 +48,28 @@ extension CardPersistenceManager {
             card.deck = deck
         }
         try coreDataStack.viewContext.save()
+        postNotification(with: card, and: .update)
     }
     
     func answerCard(_ card: Card, withComplexity complexity: AnswerComplexity) throws {
         let multiplier = Int(max(card.correctAnswersChain, 1))
         let nextTestDate = Calendar.current.date(byAdding: .day, value: complexity.daysUntilNextCheck(multiplier: multiplier), to: card.testDate ) ?? Date()
         card.testDate = nextTestDate
-        card.correctAnswersChain = (complexity == AnswerComplexity.impossible) ? 0 : +1
+        if complexity == .impossible {
+            card.correctAnswersChain = 0
+        } else {
+            card.correctAnswersChain += 1
+        }
         try coreDataStack.viewContext.save()
     }
     
     func deleteCard(_ card: Card) {
         coreDataStack.viewContext.delete(card)
+        postNotification(with: card, and: .delete)
     }
     
     func getAllCards() throws -> [Card] {
         let request: NSFetchRequest<Card> = Card.fetchRequest()
         return try coreDataStack.viewContext.fetch(request)
-    }
-    
-    private func setupObservers() {
-        notificationCenter.addObserver(self, selector: #selector(contextDidSave), name: .NSManagedObjectContextDidSave, object: nil)
     }
 }

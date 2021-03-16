@@ -18,6 +18,10 @@
 		AC4AC43125FBCB03004B2454 /* CurvedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */; };
 		AC4AC43F25FC810E004B2454 /* CurvedTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4AC43D25FC810E004B2454 /* CurvedTabBarViewController.swift */; };
 		AC4AC44325FC9409004B2454 /* CurvedTabBarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC4AC44225FC9409004B2454 /* CurvedTabBarViewController.storyboard */; };
+		AC4D76302600827A0035D098 /* CardPersistenceManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D762F2600827A0035D098 /* CardPersistenceManagerTestCase.swift */; };
+		AC4D7634260082A10035D098 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D7633260082A10035D098 /* TestCoreDataStack.swift */; };
+		AC4D7638260082D10035D098 /* CardViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D7637260082D10035D098 /* CardViewModelTestCase.swift */; };
+		AC4D763C2600BE580035D098 /* TestNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D763B2600BE580035D098 /* TestNotificationCenter.swift */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
 		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
 		AC7B69F025ED0FEF0003A60A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */; };
@@ -48,6 +52,16 @@
 		F7DDFF8E25BAAA9700BF9D75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7DDFF8C25BAAA9700BF9D75 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AC4D76262600821E0035D098 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7DDFF7625BAAA9200BF9D75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F7DDFF7D25BAAA9200BF9D75;
+			remoteInfo = MemoryCard;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AC02636A25FFCEA400B99FED /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		AC02636D25FFD10B00B99FED /* CardPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersistenceManager.swift; sourceTree = "<group>"; };
@@ -60,6 +74,12 @@
 		AC4AC43025FBCB03004B2454 /* CurvedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTabBar.swift; sourceTree = "<group>"; };
 		AC4AC43D25FC810E004B2454 /* CurvedTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedTabBarViewController.swift; sourceTree = "<group>"; };
 		AC4AC44225FC9409004B2454 /* CurvedTabBarViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurvedTabBarViewController.storyboard; sourceTree = "<group>"; };
+		AC4D76212600821E0035D098 /* MemoryCardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryCardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC4D76252600821E0035D098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC4D762F2600827A0035D098 /* CardPersistenceManagerTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPersistenceManagerTestCase.swift; sourceTree = "<group>"; };
+		AC4D7633260082A10035D098 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
+		AC4D7637260082D10035D098 /* CardViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModelTestCase.swift; sourceTree = "<group>"; };
+		AC4D763B2600BE580035D098 /* TestNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestNotificationCenter.swift; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
 		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		AC7B69EF25ED0FEF0003A60A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -93,6 +113,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AC4D761E2600821E0035D098 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F7DDFF7B25BAAA9200BF9D75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,6 +152,18 @@
 				AC4AC43D25FC810E004B2454 /* CurvedTabBarViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		AC4D76222600821E0035D098 /* MemoryCardTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC4D76252600821E0035D098 /* Info.plist */,
+				AC4D762F2600827A0035D098 /* CardPersistenceManagerTestCase.swift */,
+				AC4D7633260082A10035D098 /* TestCoreDataStack.swift */,
+				AC4D7637260082D10035D098 /* CardViewModelTestCase.swift */,
+				AC4D763B2600BE580035D098 /* TestNotificationCenter.swift */,
+			);
+			path = MemoryCardTests;
 			sourceTree = "<group>";
 		};
 		F703CBD725C3FEA4001BDC4A /* Extensions */ = {
@@ -182,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				F7DDFF8025BAAA9200BF9D75 /* MemoryCard */,
+				AC4D76222600821E0035D098 /* MemoryCardTests */,
 				F7DDFF7F25BAAA9200BF9D75 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -190,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				F7DDFF7E25BAAA9200BF9D75 /* MemoryCard.app */,
+				AC4D76212600821E0035D098 /* MemoryCardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,6 +266,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AC4D76202600821E0035D098 /* MemoryCardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC4D762A2600821E0035D098 /* Build configuration list for PBXNativeTarget "MemoryCardTests" */;
+			buildPhases = (
+				AC4D761D2600821E0035D098 /* Sources */,
+				AC4D761E2600821E0035D098 /* Frameworks */,
+				AC4D761F2600821E0035D098 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC4D76272600821E0035D098 /* PBXTargetDependency */,
+			);
+			name = MemoryCardTests;
+			productName = MemoryCardTests;
+			productReference = AC4D76212600821E0035D098 /* MemoryCardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F7DDFF7D25BAAA9200BF9D75 /* MemoryCard */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F7DDFF9225BAAA9700BF9D75 /* Build configuration list for PBXNativeTarget "MemoryCard" */;
@@ -248,9 +307,14 @@
 		F7DDFF7625BAAA9200BF9D75 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					AC4D76202600821E0035D098 = {
+						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
+						TestTargetID = F7DDFF7D25BAAA9200BF9D75;
+					};
 					F7DDFF7D25BAAA9200BF9D75 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -270,11 +334,19 @@
 			projectRoot = "";
 			targets = (
 				F7DDFF7D25BAAA9200BF9D75 /* MemoryCard */,
+				AC4D76202600821E0035D098 /* MemoryCardTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AC4D761F2600821E0035D098 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F7DDFF7C25BAAA9200BF9D75 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,6 +360,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AC4D761D2600821E0035D098 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC4D7638260082D10035D098 /* CardViewModelTestCase.swift in Sources */,
+				AC4D76302600827A0035D098 /* CardPersistenceManagerTestCase.swift in Sources */,
+				AC4D7634260082A10035D098 /* TestCoreDataStack.swift in Sources */,
+				AC4D763C2600BE580035D098 /* TestNotificationCenter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F7DDFF7A25BAAA9200BF9D75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,6 +416,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AC4D76272600821E0035D098 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F7DDFF7D25BAAA9200BF9D75 /* MemoryCard */;
+			targetProxy = AC4D76262600821E0035D098 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F7DDFF8C25BAAA9700BF9D75 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -345,6 +436,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AC4D76282600821E0035D098 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 66WZG572VA;
+				INFOPLIST_FILE = MemoryCardTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhanibek.MemoryCardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoryCard.app/MemoryCard";
+			};
+			name = Debug;
+		};
+		AC4D76292600821E0035D098 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 66WZG572VA;
+				INFOPLIST_FILE = MemoryCardTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhanibek.MemoryCardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MemoryCard.app/MemoryCard";
+			};
+			name = Release;
+		};
 		F7DDFF9025BAAA9700BF9D75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -500,6 +636,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AC4D762A2600821E0035D098 /* Build configuration list for PBXNativeTarget "MemoryCardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC4D76282600821E0035D098 /* Debug */,
+				AC4D76292600821E0035D098 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F7DDFF7925BAAA9200BF9D75 /* Build configuration list for PBXProject "MemoryCard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

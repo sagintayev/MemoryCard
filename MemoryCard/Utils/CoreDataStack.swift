@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    private let container: NSPersistentContainer
-    private let modelName = "Model"
+    let container: NSPersistentContainer
+    let modelName = "Model"
     
     var viewContext: NSManagedObjectContext {
         container.viewContext
@@ -18,13 +18,13 @@ class CoreDataStack {
     
     init() {
         container = NSPersistentContainer(name: modelName)
-        setupPersistentContainer()
-    }
-    
-    private func setupPersistentContainer() {
+        configurePersistentContainer()
         container.loadPersistentStores { (description, error) in
             guard error == nil else { fatalError("Failed to load persistent stores") }
         }
+    }
+    
+    func configurePersistentContainer() {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
