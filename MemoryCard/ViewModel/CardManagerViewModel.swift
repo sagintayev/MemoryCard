@@ -50,7 +50,7 @@ final class CardManagerViewModel {
             try? cardManager.updateCard(model, question: question, answer: answer, deck: deck)
         } else {
             guard let deck = try? deckManager.getDeck(byName: deckName) else { return }
-            try? cardManager.saveCard(question: question, answer: answer, in: deck)
+            _ = try? cardManager.saveCard(question: question, answer: answer, in: deck)
         }
         setModel(model)
     }

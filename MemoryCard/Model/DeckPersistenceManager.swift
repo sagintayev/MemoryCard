@@ -39,10 +39,12 @@ class DeckPersistenceManager {
 }
 
 extension DeckPersistenceManager {
-    func saveDeck(named name: String) throws {
+    @discardableResult
+    func saveDeck(named name: String) throws -> Deck {
         let deck = Deck(context: coreDataStack.viewContext)
         deck.name = name
         try coreDataStack.viewContext.save()
+        return deck
     }
     
     func updateDeck(_ deck: Deck, name: String) throws {

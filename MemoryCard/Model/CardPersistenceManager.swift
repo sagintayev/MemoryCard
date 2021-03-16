@@ -35,7 +35,8 @@ class CardPersistenceManager {
 }
 
 extension CardPersistenceManager {
-    func saveCard(question: String, answer: String, in deck: Deck) throws {
+    @discardableResult
+    func saveCard(question: String, answer: String, in deck: Deck) throws -> Card {
         let card = Card(context: coreDataStack.viewContext)
         card.question = question
         card.answer = answer
@@ -43,6 +44,7 @@ extension CardPersistenceManager {
         card.testDate = Date()
         card.deck = deck
         try coreDataStack.viewContext.save()
+        return card
     }
     
     func updateCard(_ card: Card, question: String? = nil, answer: String? = nil, deck: Deck? = nil) throws {

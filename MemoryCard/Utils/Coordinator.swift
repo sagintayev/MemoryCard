@@ -77,7 +77,7 @@ class Coordinator {
         deckCreationAlertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { [weak self] (_) in
             guard let deckNameTextField = deckCreationAlertController.textFields?.first else { return }
             guard let deckName = deckNameTextField.text else { return }
-            try? self?.deckManager.saveDeck(named: deckName)
+            _ = try? self?.deckManager.saveDeck(named: deckName)
             deckCreationAlertController.dismiss(animated: true)
         }))
         deckCreationAlertController.addAction(UIAlertAction(title: "Cancel", style: .destructive))
