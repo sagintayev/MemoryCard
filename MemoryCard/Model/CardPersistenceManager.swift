@@ -17,9 +17,14 @@ class CardPersistenceManager {
         self.notificationCenter = notificationCenter
     }
     
-    private func postNotification(with card: Card, and action: Action) {
+    private func postCardNotification(with card: Card, and action: Action) {
         let userInfo: [AnyHashable: Any] = ["card": card, "action": action]
         notificationCenter.post(name: .CardDidChange, object: self, userInfo: userInfo)
+    }
+    
+    private func postDeckNotification(with card: Card) {
+        let userInfo: [AnyHashable: Any] = ["deck": card.deck, "action": Action.update]
+        notificationCenter.post(name: .DeckDidChange, object: self, userInfo: userInfo)
     }
 }
 
@@ -33,7 +38,8 @@ extension CardPersistenceManager {
         card.testDate = Date()
         card.deck = deck
         try coreDataStack.viewContext.save()
-        postNotification(with: card, and: .create)
+        postDeckNotification(with: card)
+        postCardNotification(with: card, and: .create)
         return card
     }
     
@@ -48,7 +54,7 @@ extension CardPersistenceManager {
             card.deck = deck
         }
         try coreDataStack.viewContext.save()
-        postNotification(with: card, and: .update)
+        postCardNotification(with: card, and: .update)
     }
     
     func answerCard(_ card: Card, withComplexity complexity: AnswerComplexity) throws {
@@ -65,7 +71,7 @@ extension CardPersistenceManager {
     
     func deleteCard(_ card: Card) {
         coreDataStack.viewContext.delete(card)
-        postNotification(with: card, and: .delete)
+        postCardNotification(with: card, and: .delete)
     }
     
     func getAllCards() throws -> [Card] {
