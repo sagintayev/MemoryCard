@@ -8,18 +8,19 @@
 import Foundation
 
 class LearningCardViewModel {
+    private let notificationCenter: NotificationCenter
     private let deckManager: DeckPersistenceManager
     private let cardManager: CardPersistenceManager
     private let cardViewModel: CardViewModel
-    
-    private let fullButtonsChoice: [AnswerComplexity] = [.impossible, .hard, .good, .easy]
-    private let binaryButtonsChoice: [AnswerComplexity] = [.impossible, .good]
+    private let deck: Deck
     private var cardsToLearn: [Card]
     private var currentIndex = 0 {
         didSet {
             currentCardDidChange()
         }
     }
+    let fullButtonsChoice: [AnswerComplexity] = [.impossible, .hard, .good, .easy]
+    let binaryButtonsChoice: [AnswerComplexity] = [.impossible, .good]
     
     var answerWasShown = Observable(false)
     var isFinished = Observable(false)
@@ -38,11 +39,14 @@ class LearningCardViewModel {
             return nil
         }
         guard cardsToLearn.count > 0 else { return nil }
+        self.deck = deck
         self.deckManager = deckManager
         self.cardManager = cardManager
+        self.notificationCenter = notificationCenter
         self.cardViewModel = CardViewModel(cardManager: cardManager, model: nil, notificationCenter: notificationCenter)
         self.cardsToLearn = cardsToLearn
         currentCardDidChange()
+        setupObservers()
     }
     
     func answerCard(buttonIndex: Int) {
@@ -66,16 +70,39 @@ class LearningCardViewModel {
             isFinished.value = true
             return
         }
+        updateProgressText()
+        updateAnswerButtons()
+        cardViewModel.setModel(cardsToLearn[currentIndex])
+        answerWasShown.value = false
+        isNextCardShown.value = true
+    }
+    
+    private func updateProgressText() {
         let cardsLeft = cardsToLearn.count - currentIndex
         progressText.value = (cardsLeft > 1) ? "\(cardsLeft) left" : "The last one"
+    }
+    
+    private func updateAnswerButtons() {
         let multiplier = max(Int(cardsToLearn[currentIndex].correctAnswersChain), 1)
         if cardsToLearn[currentIndex].correctAnswersChain > 0 {
             answerButtons.value = fullButtonsChoice.map { $0.choice(multiplier: multiplier) }
         } else {
             answerButtons.value = binaryButtonsChoice.map { $0.choice(multiplier: multiplier) }
         }
-        cardViewModel.setModel(cardsToLearn[currentIndex])
-        answerWasShown.value = false
-        isNextCardShown.value = true
+    }
+    
+    private func setupObservers() {
+        notificationCenter.addObserver(self, selector: #selector(cardDidChange), name: .CardDidChange, object: nil)
+    }
+    
+    @objc
+    private func cardDidChange(_ notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let card = userInfo["card"] as? Card else { return }
+        guard card.deck == deck else { return }
+        if !cardsToLearn.contains(card) {
+            cardsToLearn.append(card)
+            updateProgressText()
+        }
     }
 }

@@ -9,9 +9,9 @@ import XCTest
 @testable import MemoryCard
 
 class DeckPersistenceManagerTestCase: XCTestCase {
-    private var sut: DeckPersistenceManager!
-    private var cardManager: CardPersistenceManager!
-    private var notificationCenter: TestNotificationCenter!
+    var sut: DeckPersistenceManager!
+    var cardManager: CardPersistenceManager!
+    var notificationCenter: TestNotificationCenter!
 
     override func setUp() {
         let coreDataStack = TestCoreDataStack()
