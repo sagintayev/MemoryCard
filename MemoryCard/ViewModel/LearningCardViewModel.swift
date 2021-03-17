@@ -49,6 +49,10 @@ class LearningCardViewModel {
         setupObservers()
     }
     
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
+    
     func answerCard(buttonIndex: Int) {
         let complexity: AnswerComplexity = cardsToLearn[currentIndex].correctAnswersChain > 0 ? fullButtonsChoice[buttonIndex] : binaryButtonsChoice[buttonIndex]
         try? cardManager.answerCard(cardsToLearn[currentIndex], withComplexity: complexity)

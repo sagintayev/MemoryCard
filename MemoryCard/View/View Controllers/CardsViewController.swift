@@ -87,8 +87,6 @@ extension CardsViewController: UITableViewDataSource {
         }
         return cell
     }
-    
-    
 }
 
 // MARK: - Table View Delegate

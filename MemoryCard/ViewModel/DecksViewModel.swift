@@ -43,6 +43,10 @@ class DecksViewModel {
         setObservers()
     }
     
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
+    
     func refresh() {
         if let decks = getDecks() {
             self.decks = decks

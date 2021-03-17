@@ -74,3 +74,9 @@ final class CardViewModel {
         }
     }
 }
+
+extension CardViewModel: Equatable {
+    static func == (lhs: CardViewModel, rhs: CardViewModel) -> Bool {
+        return lhs.model == rhs.model
+    }
+}
