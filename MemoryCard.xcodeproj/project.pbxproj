@@ -26,6 +26,7 @@
 		AC4D7646260128250035D098 /* CardManagerViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D7645260128250035D098 /* CardManagerViewModelTestCase.swift */; };
 		AC5B7ED42601D70D0084EA23 /* DecksViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B7ED32601D70D0084EA23 /* DecksViewModelTestCase.swift */; };
 		AC5B7ED82601F6960084EA23 /* CardsViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B7ED72601F6960084EA23 /* CardsViewModelTestCase.swift */; };
+		AC5B7EDC260268220084EA23 /* ObservableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B7EDB260268220084EA23 /* ObservableTestCase.swift */; };
 		AC65C4412601312B0003E1F6 /* LearningCardViewModelTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC65C4402601312B0003E1F6 /* LearningCardViewModelTestCase.swift */; };
 		AC6BC0BC25DA75FB0096E486 /* CardManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */; };
 		AC792A8625E17614006CCAA6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC792A8525E17614006CCAA6 /* Action.swift */; };
@@ -89,6 +90,7 @@
 		AC4D7645260128250035D098 /* CardManagerViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModelTestCase.swift; sourceTree = "<group>"; };
 		AC5B7ED32601D70D0084EA23 /* DecksViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewModelTestCase.swift; sourceTree = "<group>"; };
 		AC5B7ED72601F6960084EA23 /* CardsViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModelTestCase.swift; sourceTree = "<group>"; };
+		AC5B7EDB260268220084EA23 /* ObservableTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTestCase.swift; sourceTree = "<group>"; };
 		AC65C4402601312B0003E1F6 /* LearningCardViewModelTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningCardViewModelTestCase.swift; sourceTree = "<group>"; };
 		AC6BC0BB25DA75FB0096E486 /* CardManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManagerViewModel.swift; sourceTree = "<group>"; };
 		AC792A8525E17614006CCAA6 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				AC65C4402601312B0003E1F6 /* LearningCardViewModelTestCase.swift */,
 				AC5B7ED32601D70D0084EA23 /* DecksViewModelTestCase.swift */,
 				AC5B7ED72601F6960084EA23 /* CardsViewModelTestCase.swift */,
+				AC5B7EDB260268220084EA23 /* ObservableTestCase.swift */,
 			);
 			path = MemoryCardTests;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			files = (
 				AC4D7646260128250035D098 /* CardManagerViewModelTestCase.swift in Sources */,
 				AC5B7ED42601D70D0084EA23 /* DecksViewModelTestCase.swift in Sources */,
+				AC5B7EDC260268220084EA23 /* ObservableTestCase.swift in Sources */,
 				AC4D76402600CD600035D098 /* DeckPersistenceManagerTestCase.swift in Sources */,
 				AC4D7638260082D10035D098 /* CardViewModelTestCase.swift in Sources */,
 				AC4D76302600827A0035D098 /* CardPersistenceManagerTestCase.swift in Sources */,
